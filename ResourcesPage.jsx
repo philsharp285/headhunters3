@@ -1,309 +1,138 @@
-import React, { useState } from "react";
-import { C } from "../data";
-import { Btn } from "./Buttons";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { C, ROLES_ESTIMATOR, URGENCY, SCOPE } from "../data";
+import { BackBtn, Btn, CalendlyCTA } from "../components/Buttons";
+import { EnquiryBox } from "../components/EnquiryForm";
+import { createBreadcrumbSchema, injectSchema } from "../utils/schema";
 
-export function EnquiryForm({
-  title = "Get a Free Consultation",
-  subtitle = "Speak to a specialist about your executive search needs",
-  buttonText = "Request a Call Back",
-  context = "",
-  compact = false,
-  style = {}
-}) {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    company: "",
-    role: "",
-    salary: "",
-    urgency: "",
-    message: ""
-  });
-  const [status, setStatus] = useState("");
-  const [loading, setLoading] = useState(false);
+export default function EstimatorPage() {
+  const navigate = useNavigate();
+  const [role,setRole]=useState("");
+  const [salary,setSalary]=useState("");
+  const [urgency,setUrgency]=useState(1);
+  const [scope,setScope]=useState(0);
+  const [showResult,setShowResult]=useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setStatus("");
+  useEffect(() => {
+    document.title = "Fee Estimator | headhunters.co.uk";
+    const cleanup = injectSchema(createBreadcrumbSchema([
+      { name: "Home", url: "https://headhunters.co.uk" },
+      { name: "Fee Estimator", url: "https://headhunters.co.uk/fee-estimator" }
+    ]));
+    return cleanup;
+  }, []);
 
-    try {
-      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-      const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-
-      const response = await fetch(`${supabaseUrl}/functions/v1/send-enquiry`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${supabaseKey}`
-        },
-        body: JSON.stringify({
-          ...formData,
-          message: context ? `${context}\n\n${formData.message}` : formData.message
-        })
-      });
-
-      const data = await response.json();
-
-      if (data.success) {
-        setStatus("success");
-        setFormData({
-          name: "",
-          email: "",
-          company: "",
-          role: "",
-          salary: "",
-          urgency: "",
-          message: ""
-        });
-      } else {
-        setStatus("error");
-      }
-    } catch (error) {
-      console.error("Error submitting enquiry:", error);
-      setStatus("error");
-    } finally {
-      setLoading(false);
-    }
+  const calc=()=>{
+    if(!role||!salary)return null;
+    const s=parseInt(salary.replace(/[^0-9]/g,''));
+    if(isNaN(s)||s<1)return null;
+    const tier=ROLES_ESTIMATOR.find(r=>r.label===role)?.tier||2;
+    const base=tier===3?0.30:tier===2?0.28:0.25;
+    const urg=URGENCY[urgency];
+    const scp=SCOPE[scope];
+    const fee=s*base*urg.mult*scp.mult;
+    const badHireMin=s*3;
+    const badHireMax=s*5;
+    const vacancyCost=s*0.15*3;
+    const productivityLoss=s*0.6;
+    const teamImpact=s*0.25;
+    const totalRisk=(badHireMin+badHireMax)/2+vacancyCost+productivityLoss+teamImpact;
+    const roi=totalRisk/fee;
+    return {fee:Math.round(fee),badHireMin,badHireMax,vacancyCost:Math.round(vacancyCost),productivityLoss:Math.round(productivityLoss),teamImpact:Math.round(teamImpact),totalRisk:Math.round(totalRisk),roi:Math.round(roi*10)/10,weeks:urg.weeks,pct:Math.round(base*urg.mult*scp.mult*100)};
   };
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
+  const res=calc();
 
-  const inputStyle = {
-    width: "100%",
-    padding: "10px 12px",
-    fontSize: 14,
-    border: `1.5px solid ${C.bd}`,
-    borderRadius: 6,
-    fontFamily: "inherit",
-    boxSizing: "border-box"
-  };
-
-  const labelStyle = {
-    display: "block",
-    fontSize: 13,
-    fontWeight: 600,
-    color: C.dark,
-    marginBottom: 6
-  };
-
-  if (status === "success") {
-    return (
-      <div style={{
-        background: `linear-gradient(135deg, ${C.accent}11, ${C.al}11)`,
-        border: `2px solid ${C.accent}`,
-        borderRadius: 10,
-        padding: compact ? "20px" : "28px",
-        margin: "32px 0",
-        textAlign: "center",
-        ...style
-      }}>
-        <div style={{ fontSize: 40, marginBottom: 12 }}>✓</div>
-        <h3 style={{ fontSize: 20, fontWeight: 700, color: C.dark, margin: "0 0 8px" }}>
-          Thank you for your enquiry
-        </h3>
-        <p style={{ fontSize: 14, color: C.tl, margin: 0 }}>
-          We'll be in touch within 2 hours during business hours
-        </p>
-      </div>
-    );
-  }
-
-  return (
-    <div style={{
-      background: `linear-gradient(135deg, ${C.accent}08, ${C.al}08)`,
-      border: `2px solid ${C.accent}33`,
-      borderRadius: 10,
-      padding: compact ? "20px" : "28px",
-      margin: "32px 0",
-      ...style
-    }}>
-      <div style={{ marginBottom: 20, textAlign: compact ? "left" : "center" }}>
-        <h3 style={{ fontSize: compact ? 18 : 22, fontWeight: 700, color: C.dark, margin: "0 0 6px" }}>
-          {title}
-        </h3>
-        <p style={{ fontSize: 14, color: C.tl, margin: 0 }}>
-          {subtitle}
-        </p>
-      </div>
-
-      <form onSubmit={handleSubmit}>
-        <div style={{ display: "grid", gridTemplateColumns: compact ? "1fr" : "repeat(auto-fit, minmax(200px, 1fr))", gap: 16, marginBottom: 16 }}>
-          <div>
-            <label style={labelStyle}>Name *</label>
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              style={inputStyle}
-              placeholder="Your name"
-            />
-          </div>
-          <div>
-            <label style={labelStyle}>Email *</label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              style={inputStyle}
-              placeholder="your@email.com"
-            />
-          </div>
-        </div>
-
-        <div style={{ display: "grid", gridTemplateColumns: compact ? "1fr" : "repeat(auto-fit, minmax(200px, 1fr))", gap: 16, marginBottom: 16 }}>
-          <div>
-            <label style={labelStyle}>Company</label>
-            <input
-              type="text"
-              name="company"
-              value={formData.company}
-              onChange={handleChange}
-              style={inputStyle}
-              placeholder="Company name"
-            />
-          </div>
-          <div>
-            <label style={labelStyle}>Role to Fill *</label>
-            <input
-              type="text"
-              name="role"
-              value={formData.role}
-              onChange={handleChange}
-              required
-              style={inputStyle}
-              placeholder="e.g. Chief Financial Officer"
-            />
-          </div>
-        </div>
-
-        <div style={{ display: "grid", gridTemplateColumns: compact ? "1fr" : "repeat(auto-fit, minmax(200px, 1fr))", gap: 16, marginBottom: 16 }}>
-          <div>
-            <label style={labelStyle}>Salary Range</label>
-            <select
-              name="salary"
-              value={formData.salary}
-              onChange={handleChange}
-              style={inputStyle}
-            >
-              <option value="">Select range</option>
-              <option value="£80k-£120k">£80k-£120k</option>
-              <option value="£120k-£200k">£120k-£200k</option>
-              <option value="£200k-£300k">£200k-£300k</option>
-              <option value="£300k+">£300k+</option>
-            </select>
-          </div>
-          <div>
-            <label style={labelStyle}>Urgency</label>
-            <select
-              name="urgency"
-              value={formData.urgency}
-              onChange={handleChange}
-              style={inputStyle}
-            >
-              <option value="">Select urgency</option>
-              <option value="Immediate (1-2 weeks)">Immediate (1-2 weeks)</option>
-              <option value="Soon (2-4 weeks)">Soon (2-4 weeks)</option>
-              <option value="Planning (1-3 months)">Planning (1-3 months)</option>
-              <option value="Future (3+ months)">Future (3+ months)</option>
-            </select>
-          </div>
-        </div>
-
-        <div style={{ marginBottom: 20 }}>
-          <label style={labelStyle}>Additional Information</label>
-          <textarea
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            style={{
-              ...inputStyle,
-              minHeight: 80,
-              resize: "vertical"
-            }}
-            placeholder="Tell us about your requirements..."
-          />
-        </div>
-
-        {status === "error" && (
-          <div style={{
-            background: "#fef2f2",
-            border: "1.5px solid #fca5a5",
-            borderRadius: 6,
-            padding: "10px 12px",
-            marginBottom: 16,
-            fontSize: 13,
-            color: "#991b1b"
-          }}>
-            There was an error sending your enquiry. Please try again or email us directly.
-          </div>
-        )}
-
-        <Btn onClick={handleSubmit} variant="primary">
-          {loading ? "Sending..." : buttonText}
-        </Btn>
-      </form>
+  return <div style={{padding:"60px 20px 80px",maxWidth:900,margin:"0 auto"}}>
+    <BackBtn label="Home" onClick={()=>navigate("/")}/>
+    <div style={{textAlign:"center",marginBottom:40}}>
+      <div style={{fontSize:48,marginBottom:12}}>💷</div>
+      <h1 style={{fontSize:"clamp(28px,4vw,38px)",fontWeight:750,color:C.tx,margin:"0 0 12px"}}>Enhanced ROI Fee Calculator</h1>
+      <p style={{fontSize:15,color:C.tl}}>Calculate your search fee with full ROI analysis and bad hire cost breakdown</p>
     </div>
-  );
-}
 
-export function EnquiryBox({
-  title,
-  subtitle,
-  buttonText = "Get Expert Advice",
-  context = "",
-  compact = false
-}) {
-  const [showForm, setShowForm] = useState(false);
-
-  if (showForm) {
-    return <EnquiryForm
-      title={title}
-      subtitle={subtitle}
-      buttonText={buttonText}
-      context={context}
-      compact={compact}
-    />;
-  }
-
-  return (
-    <div style={{
-      background: `linear-gradient(135deg, ${C.accent}11, ${C.al}11)`,
-      border: `2px solid ${C.accent}`,
-      borderRadius: 10,
-      padding: compact ? "16px 20px" : "20px 24px",
-      margin: "32px 0"
-    }}>
-      <div style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        flexWrap: "wrap",
-        gap: 16
-      }}>
-        <div style={{ flex: 1, minWidth: 200 }}>
-          <h3 style={{ fontSize: compact ? 16 : 18, fontWeight: 700, color: C.dark, margin: "0 0 6px" }}>
-            {title}
-          </h3>
-          {subtitle && (
-            <p style={{ fontSize: 14, color: C.tl, margin: 0 }}>
-              {subtitle}
-            </p>
-          )}
-        </div>
-        <Btn onClick={() => setShowForm(true)} variant="primary">
-          {buttonText} →
-        </Btn>
+    <div style={{background:C.card,border:`1px solid ${C.bd}`,borderRadius:8,padding:32}}>
+      <div style={{marginBottom:24}}>
+        <label style={{display:"block",fontSize:14,fontWeight:600,color:C.tx,marginBottom:8}}>Role Level</label>
+        <select value={role} onChange={e=>setRole(e.target.value)} style={{width:"100%",padding:"12px 16px",fontSize:15,border:`1px solid ${C.bd}`,borderRadius:6,background:C.bg,color:C.tx}}>
+          <option value="">Select role...</option>
+          {ROLES_ESTIMATOR.map(r=><option key={r.label} value={r.label}>{r.label}</option>)}
+        </select>
       </div>
+
+      <div style={{marginBottom:24}}>
+        <label style={{display:"block",fontSize:14,fontWeight:600,color:C.tx,marginBottom:8}}>Annual Salary (£)</label>
+        <input type="text" value={salary} onChange={e=>setSalary(e.target.value)} placeholder="e.g., 150000" style={{width:"100%",padding:"12px 16px",fontSize:15,border:`1px solid ${C.bd}`,borderRadius:6,background:C.bg,color:C.tx}}/>
+      </div>
+
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:16,marginBottom:32}}>
+        <div>
+          <label style={{display:"block",fontSize:14,fontWeight:600,color:C.tx,marginBottom:12}}>Urgency</label>
+          <select value={urgency} onChange={e=>setUrgency(parseInt(e.target.value))} style={{width:"100%",padding:"12px 16px",fontSize:14,border:`1px solid ${C.bd}`,borderRadius:6,background:C.bg,color:C.tx}}>
+            {URGENCY.map((u,i)=><option key={i} value={i}>{u.label}</option>)}
+          </select>
+        </div>
+        <div>
+          <label style={{display:"block",fontSize:14,fontWeight:600,color:C.tx,marginBottom:12}}>Search Scope</label>
+          <select value={scope} onChange={e=>setScope(parseInt(e.target.value))} style={{width:"100%",padding:"12px 16px",fontSize:14,border:`1px solid ${C.bd}`,borderRadius:6,background:C.bg,color:C.tx}}>
+            {SCOPE.map((s,i)=><option key={i} value={i}>{s.label}</option>)}
+          </select>
+        </div>
+      </div>
+
+      <Btn onClick={()=>setShowResult(true)} style={{width:"100%",padding:"14px",fontSize:16,fontWeight:700}}>Calculate Fee & ROI Analysis</Btn>
+
+      {showResult&&res&&<div style={{marginTop:32}}>
+        <div style={{padding:24,background:`linear-gradient(135deg,${C.dark},${C.accent})`,borderRadius:8,color:"#fff",marginBottom:20}}>
+          <h3 style={{fontSize:18,fontWeight:700,margin:"0 0 16px",textAlign:"center"}}>Estimated Search Fee</h3>
+          <div style={{fontSize:48,fontWeight:800,textAlign:"center",margin:"0 0 8px",color:C.gold}}>£{res.fee.toLocaleString()}</div>
+          <div style={{fontSize:14,textAlign:"center",opacity:0.9}}>({res.pct}% of salary • {res.weeks})</div>
+        </div>
+
+        <div style={{background:C.bl,border:`2px solid ${C.red}33`,borderRadius:8,padding:24,marginBottom:20}}>
+          <h3 style={{fontSize:18,fontWeight:700,color:C.red,margin:"0 0 16px"}}>Cost of a Bad Hire (Full Breakdown)</h3>
+
+          <div style={{marginBottom:16}}>
+            <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:8}}>
+              <span style={{fontSize:14,color:C.tx}}>Direct costs (severance, legal, rehire)</span>
+              <span style={{fontSize:16,fontWeight:700,color:C.red}}>£{res.badHireMin.toLocaleString()}–£{res.badHireMax.toLocaleString()}</span>
+            </div>
+            <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:8}}>
+              <span style={{fontSize:14,color:C.tx}}>Vacancy cost (3 months at 15%)</span>
+              <span style={{fontSize:16,fontWeight:700,color:C.red}}>£{res.vacancyCost.toLocaleString()}</span>
+            </div>
+            <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:8}}>
+              <span style={{fontSize:14,color:C.tx}}>Productivity loss (underperformance)</span>
+              <span style={{fontSize:16,fontWeight:700,color:C.red}}>£{res.productivityLoss.toLocaleString()}</span>
+            </div>
+            <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",paddingBottom:12,borderBottom:`2px solid ${C.bd}`}}>
+              <span style={{fontSize:14,color:C.tx}}>Team impact & turnover</span>
+              <span style={{fontSize:16,fontWeight:700,color:C.red}}>£{res.teamImpact.toLocaleString()}</span>
+            </div>
+            <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",paddingTop:12}}>
+              <span style={{fontSize:16,fontWeight:700,color:C.dark}}>Total Risk</span>
+              <span style={{fontSize:22,fontWeight:800,color:C.red}}>£{res.totalRisk.toLocaleString()}</span>
+            </div>
+          </div>
+        </div>
+
+        <div style={{background:`linear-gradient(135deg,${C.ok}22,${C.ok}11)`,border:`2px solid ${C.ok}`,borderRadius:8,padding:24,textAlign:"center"}}>
+          <h3 style={{fontSize:18,fontWeight:700,color:C.ok,margin:"0 0 12px"}}>Return on Investment</h3>
+          <div style={{fontSize:40,fontWeight:800,color:C.ok,marginBottom:8}}>{res.roi}× ROI</div>
+          <p style={{fontSize:14,color:C.tx,margin:0,lineHeight:1.6}}>
+            For every £1 spent on retained search, you get £{res.roi} in downside risk protection. This doesn't include the upside value of an exceptional hire.
+          </p>
+        </div>
+
+        <EnquiryBox
+          title="Want a detailed quote for your search?"
+          subtitle="Discuss your specific requirements with a specialist"
+          buttonText="Request a Detailed Quote"
+          context={`Fee estimate: £${res.fee.toLocaleString()} for ${role} role at £${salary} salary`}
+        />
+      </div>}
     </div>
-  );
+
+    <CalendlyCTA style={{marginTop:40}}/>
+  </div>;
 }

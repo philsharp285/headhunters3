@@ -1,0 +1,34 @@
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { C, GLOSSARY } from "../data";
+import { BackBtn, SectionTitle } from "../components/Buttons";
+import { createBreadcrumbSchema, injectSchema } from "../utils/schema";
+
+export default function GlossaryPage() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = "Executive Search Glossary | headhunters.co.uk";
+    const cleanup = injectSchema(createBreadcrumbSchema([
+      { name: "Home", url: "https://headhunters.co.uk" },
+      { name: "Glossary", url: "https://headhunters.co.uk/glossary" }
+    ]));
+    return cleanup;
+  }, []);
+
+  return (
+    <div style={{ padding: "60px 20px 80px", maxWidth: 900, margin: "0 auto" }}>
+      <BackBtn label="Home" onClick={() => navigate("/")} />
+      <SectionTitle title="Executive Search Glossary" />
+      <p style={{ fontSize: 15, color: C.tl, maxWidth: 700, margin: "0 auto 40px", textAlign: "center" }}>
+        Plain-English definitions of key executive search and headhunting terminology.
+      </p>
+      <div style={{ display: "grid", gap: 16 }}>
+        {GLOSSARY.map((g, i) => <div key={i} style={{ background: C.card, border: `1px solid ${C.bd}`, borderRadius: 8, padding: 20 }}>
+          <h3 style={{ fontSize: 17, fontWeight: 700, color: C.accent, margin: "0 0 8px" }}>{g.t}</h3>
+          <p style={{ fontSize: 14, lineHeight: 1.6, color: C.tx, margin: 0 }}>{g.d}</p>
+        </div>)}
+      </div>
+    </div>
+  );
+}

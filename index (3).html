@@ -1,0 +1,37 @@
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { C, BLOG_ARTICLES } from "../data";
+import { BackBtn, SectionTitle } from "../components/Buttons";
+import { createBreadcrumbSchema, injectSchema } from "../utils/schema";
+
+export default function BlogPage() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = "Insights & Analysis | headhunters.co.uk";
+    const cleanup = injectSchema(createBreadcrumbSchema([
+      { name: "Home", url: "https://headhunters.co.uk" },
+      { name: "Insights", url: "https://headhunters.co.uk/insights" }
+    ]));
+    return cleanup;
+  }, []);
+
+  return <div style={{padding:"60px 20px 80px",maxWidth:1100,margin:"0 auto"}}>
+    <BackBtn label="Home" onClick={()=>navigate("/")}/>
+    <SectionTitle title="Insights & Analysis"/>
+    <p style={{fontSize:15,color:C.tl,maxWidth:700,margin:"0 auto 40px",textAlign:"center"}}>
+      In-depth perspectives on executive search, leadership hiring, and talent strategy.
+    </p>
+    <div style={{display:"grid",gap:24}}>
+      {BLOG_ARTICLES.map(a=><div key={a.id} onClick={()=>navigate(`/blog/${a.id}`)} style={{background:C.card,border:`1px solid ${C.bd}`,borderRadius:8,padding:28,cursor:"pointer",transition:"all 0.2s",boxShadow:"0 1px 3px rgba(0,0,0,0.05)"}} onMouseEnter={e=>{e.currentTarget.style.boxShadow="0 4px 12px rgba(0,0,0,0.1)";e.currentTarget.style.borderColor=C.accent;}} onMouseLeave={e=>{e.currentTarget.style.boxShadow="0 1px 3px rgba(0,0,0,0.05)";e.currentTarget.style.borderColor=C.bd;}}>
+        <div style={{display:"flex",gap:12,alignItems:"center",marginBottom:12,flexWrap:"wrap"}}>
+          <span style={{display:"inline-block",background:C.accent,color:"#fff",fontSize:10,fontWeight:700,padding:"3px 8px",borderRadius:4}}>{a.tag}</span>
+          <span style={{fontSize:12,color:C.tl}}>{a.date} • {a.readTime}</span>
+        </div>
+        <h2 style={{fontSize:22,fontWeight:700,color:C.tx,margin:"0 0 10px"}}>{a.title}</h2>
+        <p style={{fontSize:15,color:C.tl,lineHeight:1.6,margin:"0 0 12px"}}>{a.subtitle}</p>
+        <div style={{fontSize:13,color:C.accent,fontWeight:600}}>Read More →</div>
+      </div>)}
+    </div>
+  </div>;
+}

@@ -6,14 +6,11 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Client-Info, Apikey",
 };
 
-interface EnquiryPayload {
+interface LeadPayload {
   name: string;
   email: string;
-  company?: string;
   role: string;
-  salary?: string;
-  urgency?: string;
-  message?: string;
+  roleTitle: string;
 }
 
 Deno.serve(async (req: Request) => {
@@ -36,20 +33,19 @@ Deno.serve(async (req: Request) => {
       throw new Error("RESEND_API_KEY environment variable not set");
     }
 
-    const payload: EnquiryPayload = await req.json();
+    const payload: LeadPayload = await req.json();
 
     const emailBody = `
-New Enquiry from Executive Search Website
+New Hiring Pack Download Lead
 
 Name: ${payload.name}
 Email: ${payload.email}
-Company: ${payload.company || "Not provided"}
-Role: ${payload.role}
-Salary: ${payload.salary || "Not provided"}
-Urgency: ${payload.urgency || "Not provided"}
+Downloaded Pack: ${payload.roleTitle}
+Role ID: ${payload.role}
 
-Message:
-${payload.message || "No message provided"}
+Time: ${new Date().toLocaleString('en-GB', { timeZone: 'Europe/London' })}
+
+This lead came from downloading the "${payload.roleTitle}" hiring pack on headhunters.co.uk.
     `.trim();
 
     const emailResponse = await fetch("https://api.resend.com/emails", {
@@ -59,10 +55,10 @@ ${payload.message || "No message provided"}
         "Authorization": `Bearer ${RESEND_API_KEY}`,
       },
       body: JSON.stringify({
-        from: "Executive Search <onboarding@resend.dev>",
+        from: "Headhunters Leads <onboarding@resend.dev>",
         to: [YOUR_EMAIL],
         reply_to: payload.email,
-        subject: `New Enquiry: ${payload.role} - ${payload.name}`,
+        subject: `🎯 New Lead: ${payload.roleTitle} Pack - ${payload.name}`,
         text: emailBody,
       }),
     });
@@ -86,7 +82,7 @@ ${payload.message || "No message provided"}
       }
     );
   } catch (error) {
-    console.error("Error sending enquiry:", error);
+    console.error("Error sending lead notification:", error);
     return new Response(
       JSON.stringify({
         success: false,

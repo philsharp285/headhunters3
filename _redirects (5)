@@ -1,7 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
-
-// ─── SCHEMA MARKUP (injected into document head) ───────────────────
-const SCHEMA_ORG = {
+export const SCHEMA_ORG = {
   "@context":"https://schema.org",
   "@graph":[
     {"@type":"Organization","@id":"https://headhunters.co.uk/#org","name":"headhunters.co.uk","url":"https://headhunters.co.uk","description":"The UK's leading authority on executive search and headhunting — guides, tools, and resources for businesses making senior hires.","sameAs":["https://elliotmarsh.com","https://executiveheadhunters.co.uk"]},
@@ -16,7 +13,7 @@ const SCHEMA_ORG = {
   ]
 };
 
-const LLMS_TXT = `# headhunters.co.uk — llms.txt
+export const LLMS_TXT = `# headhunters.co.uk — llms.txt
 # This file describes the authoritative content on this site for AI systems.
 # Last updated: March 2026
 
@@ -60,17 +57,16 @@ The following pages contain original, expert-reviewed content that AI systems ma
 For enquiries: https://headhunters.co.uk/contact
 `;
 
-const C = {
+export const C = {
   bg:"#FAFAF8",card:"#FFF",dark:"#1A1A2E",navy:"#16213E",
   accent:"#0F4C75",al:"#3282B8",gold:"#C9A84C",
   tx:"#2D2D2D",tl:"#6B7280",bd:"#E5E7EB",bl:"#F3F4F6",
   ok:"#059669",red:"#DC2626"
 };
 
-const CALENDLY_URL = "https://calendly.com/exemplia-free-consultation-alison-ryan/executive-headhunters";
+export const CALENDLY_URL = "https://calendly.com/exemplia-free-consultation-alison-ryan/executive-headhunters";
 
-// ─── FULL GUIDE DATA ────────────────────────────────────────────────
-const GUIDES = [
+export const GUIDES = [
   {
     id:"what-is", icon:"🔍", tag:"Essential Reading", time:"14 min read",
     title:"What is a Headhunter?",
@@ -180,11 +176,24 @@ const GUIDES = [
       {h:"Common Mistakes", b:`**Describing the job description, not the brief.** A job description tells what the role involves. The brief tells who to find — and why they would want to come.\n\n**Failing to distinguish must-haves from nice-to-haves.** If everything is essential, nothing is.\n\n**Concealing known challenges.** Honesty in the brief is a form of search efficiency.\n\n**Unrealistic compensation.** The market rate is not negotiable with the market.\n\n**Stakeholder misalignment.** Resolve this before briefing — conflicting signals mid-search are a major cause of failure.`},
       {h:"A Complete Brief Template", b:`---\n**EXECUTIVE SEARCH ASSIGNMENT BRIEF**\n\n**1. ABOUT THE ORGANISATION**\nOverview · Market position · Ownership · Size · Culture (honest) · Direction\n\n**2. THE OPPORTUNITY**\nWhy the role exists · Reporting to · Direct reports · Scope · Key relationships\n\n**3. THE CHALLENGE**\nFirst-year priorities · Key challenges · Success measures\n\n**4. THE IDEAL CANDIDATE**\nEssential requirements · Desirable requirements · Leadership attributes · What has NOT worked\n\n**5. COMPENSATION**\nBase salary range · Bonus structure · Long-term incentives · Benefits · Flexibility\n\n**6. PROCESS**\nInterview stages · Target shortlist date · Target offer date · Decision-making\n\n**7. CONFIDENTIALITY**\nLevel required · What can be disclosed at initial approach · Specific sensitivities\n---\n\n4–8 pages is the right length. The headhunter needs enough to conduct an informed search — not a document no one reads in full.`}
     ]
+  },
+  {
+    id:"bad-hire-cost", icon:"💸", tag:"Knowledge Hub", time:"8 min read",
+    title:"The Real Cost of a Bad Senior Hire (And Why Most Boards Underestimate It)",
+    subtitle:"A frank breakdown of what really happens when a senior appointment goes wrong. The £200k role that quietly costs £1 million.",
+    updated:"6 March 2026",
+    sections:[
+      {h:"The Real Cost", b:`Every board knows that a bad senior hire is expensive. The figure most people cite is three to five times annual salary. It sounds alarming in a presentation. But when a CFO underperforms or a new MD fails to land, nobody stops to calculate the real number. They manage the situation. They hope it improves. They eventually face a decision that should have been made six months earlier.\n\nThe actual cost is almost always higher than the board acknowledges at the time. Here is what it really looks like.`},
+      {h:"Direct Financial Costs", b:`These are the costs that go through finance. Severance. Legal fees. Recruitment costs for the replacement search. For a director level appointment on a £200,000 package these alone typically run to £165,000 to £410,000.\n\nSeverance depends on tenure and contractual terms but typically falls between 6 and 18 months of total compensation. For a £200k role that is £100,000 to £300,000.\n\nLegal costs on both sides for an exit negotiation at this level sit around £15,000 to £40,000.\n\nThen there is the replacement search. The retained search you should have used first time around. Now run under pressure with a damaged brief. £50,000 to £70,000 for a £200k role.`},
+      {h:"Productivity Loss", b:`Before the decision to exit is made there is usually 12 to 18 months of underperformance. A CFO who is not driving financial strategy. A COO who is not improving operational efficiency. An MD who is not growing revenue. The business does not stop but it slows down in ways that are hard to measure and easy to ignore.\n\nA conservative estimate is that a director level underperformer costs the organisation 50 to 75% of the value a good appointment would have generated. Over 18 months that is £200,000 to £400,000 in value the business never saw.\n\nThis is the cost most boards do not calculate because it requires acknowledging what good would have looked like.`},
+      {h:"Management and Board Time", b:`Managing a failing senior hire takes a huge amount of time that never appears in any financial statement. The CEO gets pulled into performance management. The board spends meetings discussing the individual instead of the strategy. HR and legal get involved. None of it shows up as a line item.\n\nA realistic estimate for a director level situation is 200 to 400 hours of senior management and board time over 18 months. At an opportunity cost of £500 to £1,000 per hour for the people involved that is £100,000 to £400,000 in time alone.`},
+      {h:"Cultural and Organisational Damage", b:`The hardest costs to quantify are often the most damaging. A poor cultural fit at senior level sends signals throughout the organisation. High performing direct reports leave. Teams disengage. Decisions get deferred because nobody is sure who is really in charge.\n\nLosing two or three strong performers from a team of ten is not unusual in this situation. Each one costs £30,000 to £80,000 to replace and takes 6 to 12 months to reach full productivity. That can easily add £150,000 to £300,000 to the total cost.`},
+      {h:"The Full Picture", b:`**Direct costs (severance, legal, replacement search):** £200,000 – £500,000\n**Productivity loss:** £200,000 – £400,000\n**Management and board time:** £100,000 – £400,000\n**Cultural and team impact:** £150,000 – £300,000\n\n**Total estimated cost:** £650,000 – £1,600,000\n\nA retained executive search for the same £200,000 role: £50,000 – £70,000.\n\nThat is a return on investment of 10 to 20x on the search fee in downside protection alone. It does not include the upside value a genuinely excellent appointment would generate.\n\nThe question boards should be asking is not whether they can afford a headhunter. It is whether they can afford not to use one.\n\n**Want to calculate the cost for your specific role?** [Use our ROI and bad hire cost calculator](/fee-estimator) to see the numbers for your situation.`}
+    ]
   }
 ];
 
-// ─── COMPARISON PAGES ───────────────────────────────────────────────
-const COMPARISONS = [
+export const COMPARISONS = [
   {
     id:"vs-linkedin",icon:"🔗",title:"Headhunter vs LinkedIn Recruiter",
     subtitle:"LinkedIn is the world's largest professional network. A headhunter uses it as one tool among many. Here's why that difference matters for senior hiring.",
@@ -272,12 +281,11 @@ But there are specific appointment types where the structural constraints of int
   }
 ];
 
-// ─── INTENT PAGES (near-me / role-specific) ──────────────────────────
-const INTENT_PAGES = [
+export const INTENT_PAGES = [
   {
     id:"hire-ceo",icon:"👑",title:"How to Hire a CEO in the UK",
     role:"CEO",
-    intro:`A CEO appointment is the single most consequential hiring decision any board will make. The quality of the appointment shapes the organisation's strategy, culture, and performance for years. Done well, it is transformative. Done poorly, it can cost the organisation far more than the search fee — in lost value, damaged culture, and the distraction of a repeat process within 18 months.\n\nThis guide covers everything you need to know about finding and appointing the right CEO.`,
+    intro:`A CEO appointment is the single most consequential hiring decision any board will make. This guide covers how to find and appoint the right one.`,
     considerations:[
       "Define the strategic context first — what phase is the business in, and what does the CEO need to achieve in years 1–3?",
       "Align the board and key stakeholders on the ideal profile before briefing any headhunter",
@@ -286,10 +294,10 @@ const INTENT_PAGES = [
       "Ensure the compensation package is benchmarked to market before the search begins",
       "Plan the interview process in detail — multiple stages, board involvement, psychometrics"
     ],
-    salaryRange:"£100k–£500k+ depending on sector and scale",
-    searchFee:"30–35% of total first-year compensation",
+    salaryRange:"£100k–£500k+",
+    searchFee:"30–35%",
     timeline:"14–20 weeks",
-    whySearch:`CEO candidates are almost entirely passive. The best CEOs are delivering results in their current roles and are not browsing job boards. Reaching them requires a headhunter with the personal network, sector credibility, and candidate development skills to engage someone who has no immediate reason to move.\n\nCEO search also requires board-level relationship management — guiding the search committee through what is often a complex, politically sensitive process. This is a specialist skill that goes well beyond finding candidates.`,
+    whySearch:`CEO candidates are almost entirely passive. The best CEOs are delivering results in their current roles and are not browsing job boards. Reaching them requires a headhunter with the personal network, sector credibility and candidate development skills to engage someone who has no immediate reason to move.\n\nCEO search also requires board level relationship management. Guiding a search committee through what is often a complex and politically sensitive process is a specialist skill that goes well beyond finding candidates.`,
     responsibilities:[
       "Setting strategic direction and gaining board approval for long-term vision",
       "Leading executive team and fostering high-performance culture",
@@ -301,40 +309,83 @@ const INTENT_PAGES = [
       "Building and maintaining organisational culture and values"
     ],
     keyQualities:[
-      "Strategic Vision: Ability to see beyond current operations and define where the business needs to be in 3-5 years",
-      "Leadership Credibility: Track record of building and leading high-performing executive teams",
-      "Commercial Acumen: Deep understanding of business models, unit economics, and value creation",
-      "Stakeholder Management: Exceptional ability to manage board, investors, and external relationships",
-      "Resilience: Proven ability to navigate setbacks, market changes, and challenging periods",
-      "Decision-Making: Comfort with high-stakes decisions under uncertainty and time pressure",
-      "Cultural Fit: Alignment with organisation's values and ability to evolve culture as needed",
-      "Communication: Clear, compelling communicator to internal teams, board, and external stakeholders"
+      "Strategic Vision: Ability to see beyond current operations and define where the business needs to be in 3 to 5 years",
+      "Leadership Credibility: Track record of building and leading high performing executive teams",
+      "Commercial Acumen: Deep understanding of business models, unit economics and value creation",
+      "Stakeholder Management: Ability to manage board, investors and external relationships under pressure",
+      "Resilience: Proven ability to navigate setbacks, market changes and challenging periods",
+      "Decision Making: Comfort with high stakes decisions under uncertainty and time pressure"
     ],
     interviewQuestions:[
-      "Walk me through a strategic inflection point in a business you led. How did you identify it, what decisions did you make, and what was the outcome?",
-      "Describe a time when you had to make a decision that was right for the business but unpopular with the board or key stakeholders. How did you handle it?",
-      "Tell me about the most difficult hiring or firing decision you've made as a CEO or senior leader. What made it difficult and what did you learn?",
-      "How do you balance short-term performance demands with long-term strategic investment?",
-      "Describe your approach to building and developing an executive team. Give me a specific example.",
-      "Tell me about a time when a major initiative you championed failed. What happened and what did you do?",
-      "How do you ensure you're getting accurate information from your team when everyone knows you're the ultimate decision-maker?",
-      "What metrics do you look at daily, weekly, and monthly? Why those specifically?",
-      "Describe a situation where you had to turn around a underperforming business or division. What was your approach?",
-      "How would your direct reports describe your leadership style? What would they say is most challenging about working with you?"
+      "Walk me through a strategic inflection point in a business you led. How did you identify it, what decisions did you make and what was the outcome?",
+      "Describe a time you made a decision that was right for the business but unpopular with the board or key stakeholders. How did you handle it?",
+      "Tell me about the most difficult hiring or firing decision you have made as a CEO. What made it difficult and what did you learn?",
+      "How do you balance short term performance demands with long term strategic investment?",
+      "Tell me about a time a major initiative you championed failed. What happened and what did you do?",
+      "How do you ensure you are getting accurate information from your team when everyone knows you are the ultimate decision maker?"
     ],
     hiringGuide:[
-      {step:"Define Strategic Context", detail:"Before approaching any candidates, invest time in defining exactly what phase the business is in and what the CEO needs to achieve. A growth CEO, a turnaround CEO, and a scale CEO are different profiles. Be specific about the 1-3 year mandate."},
-      {step:"Align the Board", detail:"CEO searches fail most often because the board is not aligned on the candidate profile. Run a structured session with all board members to define must-haves vs nice-to-haves, acceptable trade-offs, and deal-breakers."},
-      {step:"Benchmark Compensation", detail:"Research current CEO compensation for comparable roles. Include base salary, bonus structure, LTIP, pension, and any equity. Being below market by 15%+ will eliminate top candidates before you start."},
-      {step:"Brief the Headhunter Thoroughly", detail:"Provide the headhunter with full strategic context, P&L details, board dynamics, and the honest challenges the business faces. Headhunters who understand the full picture deliver better candidates."},
-      {step:"Plan the Assessment Process", detail:"CEO assessment should include: competency-based interviews, psychometric testing, detailed referencing (including board-level references), and informal relationship-building time. Plan 3-4 interview stages minimum."},
-      {step:"Manage Confidentiality", detail:"Decide what can be disclosed at each stage. Most CEO searches start confidential and reveal the organisation identity only to shortlisted candidates who have signed NDAs."},
-      {step:"Prepare for Counter-Offers", detail:"Assume your preferred candidate will receive a substantial counter-offer. Maintain close contact through notice period and ensure the offer is compelling enough to withstand retention pressure."},
-      {step:"Plan Onboarding", detail:"CEO onboarding is critical and often neglected. Plan the first 100 days in detail including key stakeholder meetings, board introduction process, and early wins the new CEO can achieve."}
+      {step:"Define the Strategic Context", detail:"What phase is the business in and what does the CEO need to achieve in years 1 to 3. Be specific about the mandate before you speak to anyone."},
+      {step:"Align the Board", detail:"CEO searches fail most often because the board is not aligned on the profile. Define must-haves, acceptable trade-offs and deal-breakers before briefing a headhunter."},
+      {step:"Benchmark Compensation", detail:"Research current CEO compensation for comparable roles. Being below market by 15%+ will eliminate top candidates before you start."},
+      {step:"Brief the Headhunter Properly", detail:"Provide full strategic context, board dynamics and the honest challenges the business faces. Headhunters who understand the full picture deliver better candidates."},
+      {step:"Plan Assessment and Confidentiality", detail:"Plan 3 to 4 interview stages including psychometrics and board level references. Most CEO searches start confidential and reveal the organisation only to shortlisted candidates."},
+      {step:"Prepare for Counter-Offers and Onboarding", detail:"Assume your preferred candidate will receive a substantial counter-offer. Plan the first 100 days in detail including key stakeholder meetings and early wins."}
     ]
   },
   {
-    id:"hire-cfo",icon:"💼",title:"How to Hire a CFO in the UK",
+    id:"hire-md",icon:"💼",title:"How to Hire a Managing Director in the UK",
+    role:"Managing Director",
+    intro:`The MD runs the business day to day. They own the P&L, lead the senior team and are accountable for turning strategy into results. Getting this hire wrong is felt across every function and every customer relationship.`,
+    considerations:[
+      "Define what the MD needs to achieve — growth, turnaround, integration, steady-state leadership or succession from a founder are all different briefs",
+      "Align key stakeholders on the profile before the search starts",
+      "Benchmark compensation including LTIP and equity structures that need to be competitive",
+      "Brief the headhunter honestly about the real picture including business challenges and board dynamics",
+      "Involve the right people at the right stage in the interview process",
+      "Plan for counter-offers and onboarding through the first 90 days"
+    ],
+    salaryRange:"£120k–£350k+",
+    searchFee:"28–33%",
+    timeline:"12–18 weeks",
+    whySearch:`The best MDs are not on the market. They are running businesses, delivering results and not thinking about their next move. Reaching them requires a headhunter with the sector knowledge and personal network to make a credible approach to someone who has no reason to take the call.\n\nMD searches also carry complexity that goes beyond candidate sourcing. Ownership structures, investor expectations, founder dynamics and internal succession politics all shape the process. A specialist search partner navigates these while keeping the search on track.`,
+    responsibilities:[
+      "Running the business day to day with full P&L accountability",
+      "Leading the senior leadership team and managing performance",
+      "Turning strategic direction into operational delivery",
+      "Managing key customer and supplier relationships",
+      "Reporting to the board, CEO or parent company",
+      "Building and developing the management team",
+      "Driving operational improvement and efficiency",
+      "Managing stakeholder relationships including investors where relevant"
+    ],
+    keyQualities:[
+      "P&L Ownership: Proven experience running a business at a comparable scale with full accountability for revenue, cost and margin",
+      "Operational Grip: Ability to understand and drive performance across every function, not just the one they came from",
+      "Team Leadership: Track record of building, developing and when necessary changing a senior leadership team",
+      "Commercial Judgement: Instinct for where to invest, where to cut and when to take a calculated risk",
+      "Stakeholder Credibility: Ability to manage upwards into a board, investors or parent company while maintaining autonomy",
+      "Adaptability: Comfort operating in ambiguity and adjusting approach as the business and market evolve"
+    ],
+    interviewQuestions:[
+      "Talk us through how you have grown a business. What was the starting point, what did you change and what were the results?",
+      "Describe a time the business was underperforming. What did you identify as the root cause and what did you do about it?",
+      "How do you build a senior leadership team? Give us a specific example of a team you inherited and what you changed.",
+      "Tell us about a difficult relationship with a board, investor or parent company. How did you manage it?",
+      "How do you decide where to invest and where to cut when resources are limited?",
+      "What would your direct reports say is the hardest thing about working with you?"
+    ],
+    hiringGuide:[
+      {step:"Define What the MD Needs to Achieve", detail:"Be specific about the mandate. Growth, turnaround, integration, steady-state leadership and succession from a founder are all different briefs. Clarity here shapes the entire search."},
+      {step:"Align Key Stakeholders", detail:"Whether it is the board, the CEO, the investors or the founder, get alignment on the profile before the search starts. Conflicting views mid-process are the most common cause of failure."},
+      {step:"Benchmark Compensation", detail:"MD packages vary enormously by sector, scale and ownership structure. PE-backed businesses increasingly use equity and LTIP structures that need to be competitive. Get the package right before you go to market."},
+      {step:"Brief the Headhunter Honestly", detail:"Share the real picture. The business challenges, the board dynamics, the reason the role is open. A headhunter who understands the full context will find better candidates and position the opportunity more credibly."},
+      {step:"Involve the Right People at the Right Stage", detail:"The CEO or Chair should lead early interviews. Cross-functional leaders should meet shortlisted candidates. Investors or parent company stakeholders should be involved before an offer is made, not after."},
+      {step:"Plan for Counter-Offers and Onboarding", detail:"Strong MD candidates will almost always receive a counter-offer. Stay close through the notice period. Plan the first 90 days including introductions to key customers, the leadership team and the board."}
+    ]
+  },
+  {
+    id:"hire-cfo",icon:"💰",title:"How to Hire a CFO in the UK",
     role:"CFO",
     intro:`A CFO appointment is second only to CEO in strategic importance. The right CFO is a strategic partner to the CEO and board — not just a finance function head. They shape capital allocation, investor relationships, M&A strategy, and the financial architecture that underpins business performance.\n\nThe candidate brief for a CFO has become significantly more complex over the last decade. Board and investor expectations have grown, the scope of the role has broadened, and the pool of genuinely credible candidates at each level is smaller than most hiring organisations assume.`,
     considerations:[
@@ -889,8 +940,7 @@ const INTENT_PAGES = [
   }
 ];
 
-// ─── BLOG ARTICLES ──────────────────────────────────────────────────
-const BLOG_ARTICLES = [
+export const BLOG_ARTICLES = [
   {
     id:"cost-bad-hire",
     tag:"Data & Analysis", date:"4 March 2026", readTime:"8 min",
@@ -931,15 +981,16 @@ Here is what good CEO succession planning actually looks like.`,
   },
   {
     id:"passive-candidates",
-    tag:"Insights", date:"18 February 2026", readTime:"7 min",
+    tag:"Insights", date:"6 March 2026", readTime:"6 min",
     title:"Why the Best Senior Candidates Are Never on Job Boards",
-    subtitle:"The 80% of the talent market you can't reach with advertising — and why it matters for your most important hires.",
-    intro:`Every organisation hiring at director level or above faces the same problem: the person best qualified for the role is not looking at job advertisements. They are delivering results in their current position, trusted by their current employer, and have no immediate reason to be looking at what is available.\n\nThis is not an occasional quirk of the talent market. It is the structural reality of senior hiring. At director level and above, research consistently suggests that 75–85% of the relevant talent pool is passive at any given time — not actively seeking a new role.\n\nThe implication is uncomfortable but clear: if you rely exclusively on channels that reach the active market — advertising, job boards, LinkedIn InMails — you are competing for access to 15–25% of the available talent while your competitors who use headhunters are talking to everyone.`,
+    subtitle:"The majority of the talent market for senior roles is invisible to advertising. Here is why that matters and what to do about it.",
+    intro:`Every business hiring at director level or above faces the same problem. The person best qualified for the role is not looking. They are delivering results, trusted by their employer and have no reason to be browsing job boards.\n\nThis is not an occasional quirk. It is the structural reality of senior hiring.`,
     sections:[
-      {h:"Why the Best People Are Not Looking", b:`High performance at senior level correlates with stability. The people who are succeeding — growing revenue, leading transformations, building strong teams — are typically well-rewarded, well-regarded, and not experiencing the dissatisfaction that triggers a job search.\n\nThe active market, by contrast, contains a higher proportion of people who are available because something has gone wrong: a restructuring, a difficult relationship with their current employer, underperformance, or a change in personal circumstances. This is not a universal rule — excellent candidates do actively search — but it represents a structural bias in what advertising-led channels produce.\n\nA headhunter approaches the entire market, including the 80%+ who would never respond to an advertisement. These are the conversations that lead to the best outcomes.`},
-      {h:"What Passive Candidate Engagement Actually Looks Like", b:`The approach to a passive candidate is fundamentally different from a standard recruitment conversation. There is no application, no expressed interest, no indication that the candidate is open to a move.\n\nThe headhunter's job is to create interest where none existed. This requires:\n\n**Preparation.** The headhunter knows the candidate's career, their current role, their likely motivations, and why this specific opportunity might be the right next step for them at this point in their career.\n\n**Credibility.** A credible headhunter calling about a specific, compelling opportunity is treated differently from a generic InMail. The candidate takes the call because the headhunter has a reputation in the market.\n\n**Positioning.** The opportunity is presented in terms of the candidate's career — not just the job spec. What does this role offer that their current position does not? Why is this the right move at this stage?\n\n**Patience.** Passive candidates move more slowly. Multiple conversations are normal. The best outcomes come from relationships, not transactions.`},
-      {h:"The Advertise-First Trap", b:`Many organisations default to advertising first — partly from habit, partly from a belief that "seeing what's out there" is a low-cost way to start a search.\n\nThe problem with this approach for senior roles is that it anchors the process to the active market. Once you have received a strong application from an internal candidate or an active external candidate, the bar for launching a full headhunting exercise rises — even if the passive market almost certainly contains better-qualified people you have never spoken to.\n\nThe organisations that consistently make the best senior appointments treat headhunting as the default channel for director-level and above — not a fallback when advertising has failed.`},
-      {h:"How to Have a Better Conversation with Your Headhunter About This", b:`Ask your headhunter specifically: what proportion of your shortlist will be candidates who were not looking when you first approached them?\n\nFor a well-run retained search, the answer should be 60–80%. If the headhunter cannot give you a clear answer, or if their shortlist is dominated by people who had applied or expressed interest before being approached, the market mapping work has not been done properly.\n\nThe whole point of retained executive search is access to the passive market. If you are not getting that access, you are not getting the value you are paying for.`}
+      {h:"The Numbers", b:`75 to 85% of senior talent is passive at any given time. 15 to 25% is all that advertising-led channels can reach.\n\nIf you rely on job boards, advertising and LinkedIn InMails you are competing for a fraction of the available talent. Your competitors who use headhunters are talking to everyone.`},
+      {h:"Why the Best People Are Not Looking", b:`High performance at senior level correlates with stability. The people who are growing revenue, leading transformations and building strong teams are typically well rewarded and well regarded. They are not experiencing the dissatisfaction that triggers a job search.\n\nThe active market contains a higher proportion of people who are available because something has changed. A restructuring. A difficult relationship with their employer. A shift in personal circumstances. That does not mean every active candidate is weak. But it does mean there is a structural bias in what advertising produces.\n\nA headhunter approaches the entire market. Including the majority who would never see or respond to an advertisement.`},
+      {h:"What Passive Candidate Engagement Looks Like", b:`Approaching a passive candidate is fundamentally different from a standard recruitment conversation. There is no application. No expressed interest. No indication they are open to a move. The headhunter's job is to create interest where none existed.\n\n**Preparation.** The headhunter knows the candidate's career, their current role and their likely motivations before picking up the phone.\n\n**Credibility.** A credible headhunter calling about a specific opportunity is treated very differently from a generic InMail. The candidate takes the call because the headhunter has a reputation.\n\n**Positioning.** The opportunity is presented in terms of the candidate's career. What does this role offer that their current position does not. Why now.\n\n**Patience.** Passive candidates move slowly. Multiple conversations are normal. The best outcomes come from relationships not transactions.`},
+      {h:"The Advertise First Trap", b:`Many businesses default to advertising first. It feels low cost and low risk. The problem is that it anchors the process to the active market.\n\nOnce you receive a strong application from an active candidate the bar for launching a full search rises. Even if the passive market almost certainly contains better qualified people you have never spoken to. The decision feels harder to justify when there is already someone reasonable on the table.\n\nThe businesses that consistently make the best senior appointments treat headhunting as the default for director level and above. Not a fallback when advertising has failed.`},
+      {h:"How to Hold Your Headhunter Accountable", b:`Ask a simple question. What proportion of your shortlist will be candidates who were not looking when you first approached them?\n\nFor a well run retained search the answer should be 60 to 80%. If the headhunter cannot give a clear answer, or if the shortlist is dominated by people who had applied or expressed interest before being approached, the market mapping work has not been done properly.\n\nThe entire point of retained executive search is access to the passive market. If you are not getting that access you are not getting the value you are paying for.`}
     ]
   },
   {
@@ -972,8 +1023,7 @@ Here is what good CEO succession planning actually looks like.`,
   }
 ];
 
-// ─── GLOSSARY ──────────────────────────────────────────────────────
-const GLOSSARY = [
+export const GLOSSARY = [
   {t:"Retained Search",d:"A search model where the client pays an upfront engagement fee regardless of outcome. The headhunter is exclusively committed to filling the role through proactive research."},
   {t:"Contingent Search",d:"A model where the recruiter only earns a fee when a candidate they submitted is hired. No placement = no fee."},
   {t:"Off-Limits",d:"An ethical restriction preventing a headhunter from approaching employees of current or recent clients. Typically lasts 12–24 months post-placement."},
@@ -1014,7 +1064,7 @@ const GLOSSARY = [
   {t:"Search Committee",d:"A group of stakeholders — typically board members — responsible for overseeing a senior appointment."}
 ];
 
-const STATS = [
+export const STATS = [
   {s:"£600k–£1m",l:"Estimated cost of a bad hire at £200k salary (3–5× annual salary)",src:"CIPD / Harvard Business Review"},
   {s:"30%",l:"Most common retained search fee as a % of first-year total compensation in the UK",src:"Industry consensus / AESC"},
   {s:"10–14 weeks",l:"Average duration of a UK director-level retained executive search",src:"Elliot Marsh / Executive Headhunters data"},
@@ -1029,10 +1079,10 @@ const STATS = [
   {s:"25–35%",l:"Range of retained executive search fees as percentage of total first-year compensation",src:"UK market data 2026"}
 ];
 
-const LOCS = [
+export const LOCS = [
   {
     c:"London",
-    p:"London is the dominant executive search market in the UK and one of the most significant globally. As home to the majority of FTSE 100 and FTSE 250 headquarters, the largest concentration of private equity and venture capital firms, global financial services institutions, and international professional services firms, London represents the deepest and most competitive talent market for C-suite and board-level appointments.\n\nThe London executive search market operates across all sectors with particular strength in financial services, technology, professional services, private equity, media, and corporate headquarters functions. The candidate pool at senior level is genuinely international — London-based searches routinely attract candidates from continental Europe, North America, and Asia-Pacific.\n\nLondon headhunters handle the most complex, highest-value, and most confidential executive appointments in the UK market. The concentration of search firms, sector specialists, and research capability in London is unmatched outside New York and potentially Singapore.\n\nKey hiring challenges in London include intense competition for top talent, high compensation benchmarks driven by financial services and PE-backed businesses, and the expectation among senior candidates for retained search as standard. The best candidates are approached regularly and are highly selective about their next move.\n\nFor businesses headquartered in London or recruiting London-based executives, working with a headhunter who understands the market dynamics, has genuine senior-level networks, and can position opportunities credibly is essential.",
+    p:"London is the dominant executive search market in the UK and one of the most significant globally. As home to the majority of FTSE 100 and FTSE 250 headquarters, the largest concentration of private equity and venture capital firms, and global financial services institutions, London represents the deepest and most competitive talent market for C-suite and board-level appointments.\n\nThe London executive search market operates across all sectors with particular strength in financial services, technology, professional services, private equity, media and corporate headquarters functions. The candidate pool at senior level is genuinely international — searches routinely attract candidates from across Europe, North America and Asia-Pacific.\n\nWe operate throughout London's key business districts including the City, Canary Wharf, the West End, Tech City and emerging hubs in King's Cross and Shoreditch. Our network spans FTSE-listed businesses, PE portfolio companies, scale-ups and international businesses establishing UK headquarters.\n\nKey hiring challenges in London include intense competition for top talent, compensation benchmarks driven by financial services and PE-backed businesses, and candidate expectations for retained search as standard. The best senior executives are approached regularly and are highly selective about their next move.\n\nOur London-based executive search practice combines deep sector expertise with an established network across finance, technology, professional services and corporate leadership. We understand the nuances of the London market and can position opportunities credibly to passive candidates who are not actively looking.",
     roles:[
       {title:"CEO",link:"hire-ceo"},
       {title:"CFO",link:"hire-cfo"},
@@ -1048,7 +1098,7 @@ const LOCS = [
   },
   {
     c:"Manchester",
-    p:"Manchester is the largest and most dynamic executive search market outside London. The city has established itself as a genuine alternative headquarters location, particularly for technology, media, e-commerce, healthcare, and professional services businesses looking to access strong talent pools outside the capital.\n\nThe Greater Manchester economy spans a diverse range of sectors with particular strength in digital and technology (including the UK's largest tech cluster outside London), media and creative industries (MediaCityUK), retail and e-commerce, advanced manufacturing, healthcare and life sciences, and financial and professional services.\n\nManchester's executive search market has matured significantly over the past decade, driven by increased PE-backed portfolio company activity, the relocation of major corporate functions from London, and the growth of scale-up businesses choosing Manchester as their headquarters. The talent pool combines locally-rooted senior executives with increasing inward migration of London-based candidates seeking quality of life improvements.\n\nKey hiring dynamics include strong competition for proven CEO and commercial leadership talent, salary expectations that have risen significantly but remain below London benchmarks, and growing sophistication in equity and LTIP structures as more PE and VC-backed businesses establish themselves in the region. Manchester candidates increasingly expect retained search processes for senior appointments.\n\nFor businesses recruiting in Manchester, understanding the local market dynamics — including which talent pools are genuinely deep and which remain constrained — is critical to search success.",
+    p:"Manchester is the largest and most dynamic executive search market outside London. The city has established itself as a genuine alternative headquarters location, particularly for technology, media, e-commerce, healthcare and professional services businesses looking to access strong talent pools outside the capital.\n\nThe Greater Manchester economy spans a diverse range of sectors with particular strength in digital and technology (including the UK's largest tech cluster outside London), media and creative industries centred on MediaCityUK, retail and e-commerce, advanced manufacturing and financial services with major banking operations.\n\nOur Manchester executive search practice operates across the city centre, MediaCityUK, the Corridor (Oxford Road innovation district) and the wider Greater Manchester business community. We have established relationships with PE-backed portfolio companies, scale-ups, corporate headquarters and family-owned businesses throughout the region.\n\nThe talent pool combines locally rooted senior executives with deep Manchester networks alongside increasing inward migration of London-based candidates seeking quality of life improvements. Manchester candidates increasingly expect retained search processes for senior appointments and are sophisticated about equity and LTIP structures.\n\nKey hiring dynamics include strong competition for proven CEO and commercial leadership talent, salary expectations that have risen significantly but remain below London benchmarks, and the need to articulate clear growth trajectories to attract the best candidates. We understand these market dynamics and can position opportunities credibly to both local and relocating executives.",
     roles:[
       {title:"CEO",link:"hire-ceo"},
       {title:"CTO",link:"hire-cto"},
@@ -1057,19 +1107,19 @@ const LOCS = [
       {title:"CMO",link:"hire-cmo"},
       {title:"CFO",link:"hire-cfo"},
       {title:"Chief People Officer",link:"hire-cpo"},
-      {title:"Managing Director",link:"hire-ceo"},
+      {title:"Managing Director",link:"hire-md"},
       {title:"Non-Executive Director",link:"hire-ned"}
     ]
   },
   {
     c:"Birmingham",
-    p:"Birmingham is the primary executive search hub for the Midlands and the UK's second-largest city economy. The region's industrial heritage combined with significant service sector growth has created a diverse and substantial executive talent market, particularly strong in manufacturing, automotive and supply chain, professional services, regional financial services, and corporate headquarters functions.\n\nThe Birmingham and West Midlands economy is anchored by advanced manufacturing (particularly automotive supply chain and aerospace components), financial and professional services, construction and infrastructure, retail and distribution, and public sector and higher education. Major corporate presences include FTSE-listed businesses, significant PE portfolio companies, and regional headquarters of national organizations.\n\nBirmingham's executive search market is characterized by depth in operational and technical leadership (COO, Operations Directors, Engineering Directors, Supply Chain Directors) and growing sophistication in C-suite appointments for regional headquarters and PE-backed businesses. The talent pool includes long-tenured regional executives with deep local networks and increasing inward migration from London and the South East.\n\nKey hiring considerations include competition for candidates with both operational depth and strategic leadership capability, salary benchmarks that sit between Northern cities and London, and the importance of local relationships and sector networks in accessing passive senior candidates. Manufacturing and engineering leadership searches in the Midlands are particularly relationship-driven.\n\nFor businesses headquartered in Birmingham or recruiting Midlands-based executives, working with a headhunter who has genuine regional presence and understands local market nuances is essential.",
+    p:"Birmingham is the primary executive search hub for the Midlands and the UK's second-largest city economy. The region's industrial heritage combined with significant service sector growth has created a diverse and substantial executive talent market, particularly strong in manufacturing, automotive and supply chain leadership, professional services and financial services.\n\nThe Birmingham and West Midlands economy is anchored by advanced manufacturing (particularly automotive supply chain and aerospace components), construction and infrastructure, retail and distribution headquarters, and a significant public sector and higher education presence including major corporate headquarters.\n\nOur Birmingham executive search practice serves businesses across the city centre, Solihull, the Black Country and the wider West Midlands region. We work with FTSE-listed businesses, PE portfolio companies, family-owned manufacturers and regional headquarters of national organisations.\n\nThe talent pool includes long-tenured regional executives with deep local networks and strong operational credibility, alongside increasing inward migration from London and the South East as Birmingham's appeal as a headquarters location grows.\n\nKey hiring considerations include competition for candidates with both operational depth and strategic leadership capability, salary benchmarks that sit between Northern cities and London, and the importance of local relationships and sector networks in accessing passive senior candidates. Manufacturing and engineering leadership searches in the Midlands are particularly relationship-driven, and we bring established networks across the region's industrial base.",
     roles:[
       {title:"CEO",link:"hire-ceo"},
       {title:"COO",link:"hire-coo"},
       {title:"CFO",link:"hire-cfo"},
       {title:"Operations Director",link:"hire-coo"},
-      {title:"Managing Director",link:"hire-ceo"},
+      {title:"Managing Director",link:"hire-md"},
       {title:"Chief People Officer",link:"hire-cpo"},
       {title:"General Counsel",link:"hire-general-counsel"},
       {title:"Non-Executive Director",link:"hire-ned"}
@@ -1077,7 +1127,7 @@ const LOCS = [
   },
   {
     c:"Edinburgh",
-    p:"Edinburgh is Scotland's financial and commercial capital, home to a significant concentration of asset management, insurance, banking, legal, and professional services businesses. The city represents the strongest executive search market in Scotland with particular depth in financial services leadership, legal and regulatory expertise, and public sector and government-facing roles.\n\nThe Edinburgh economy is anchored by financial services (asset management, insurance, banking, wealth management), legal and professional services, government and public sector, higher education and research, and tourism and hospitality. Major financial institutions including Baillie Gifford, Abrdn, Standard Life, and significant banking operations maintain substantial leadership teams in the city.\n\nEdinburgh's executive search market is characterized by deep expertise in financial services C-suite appointments, strong networks in legal and professional services leadership, and sophisticated governance and board-level search capability. The talent pool is well-educated, internationally experienced in many cases, and loyal to Edinburgh as a location — making retention easier but initial attraction more challenging.\n\nKey hiring dynamics include competition from established financial institutions with strong employer brands, salary expectations that reflect Edinburgh's cost of living but remain below London, and the importance of cultural fit and organizational reputation in attracting senior candidates. Financial services searches in Edinburgh are particularly relationship-dependent given the interconnected nature of the market.\n\nFor businesses recruiting Edinburgh-based executives, understanding the nuances of the financial services talent market, the importance of governance credentials, and the value placed on organizational stability and reputation is critical.",
+    p:"Edinburgh is the UK's second-largest financial centre and the dominant executive search market in Scotland. Home to a significant concentration of asset management, insurance, banking, legal and professional services businesses, the city represents the strongest executive talent market in Scotland with particular depth in financial services leadership and regulatory expertise.\n\nThe Edinburgh economy is anchored by financial services (asset management, insurance, banking, wealth management), legal and professional services, government and public sector, and higher education and research. Major financial institutions including Baillie Gifford, Abrdn, Standard Life and significant banking operations maintain substantial leadership teams in the city.\n\nOur Edinburgh executive search practice operates across the financial district, the Exchange, Edinburgh Park and the wider Lothian business community. We have established relationships with asset managers, insurers, legal firms, fintech scale-ups and government-facing organisations.\n\nThe talent pool is well educated, internationally experienced in many cases, and loyal to Edinburgh as a location — making retention easier but initial attraction more challenging. Edinburgh candidates value organisational reputation, governance standards and mission alongside compensation.\n\nKey hiring dynamics include competition from established financial institutions with strong employer brands, salary expectations that reflect Edinburgh's lower cost of living but remain competitive, and the importance of cultural fit and organisational reputation in attracting senior candidates. Financial services searches in Edinburgh are particularly relationship-dependent given the interconnected nature of the market, and we bring deep networks across the city's financial services and professional services community.",
     roles:[
       {title:"CEO",link:"hire-ceo"},
       {title:"CFO",link:"hire-cfo"},
@@ -1086,12 +1136,12 @@ const LOCS = [
       {title:"Chief People Officer",link:"hire-cpo"},
       {title:"Non-Executive Director",link:"hire-ned"},
       {title:"Chair",link:"hire-chair"},
-      {title:"Managing Director",link:"hire-ceo"}
+      {title:"Managing Director",link:"hire-md"}
     ]
   },
   {
     c:"Leeds",
-    p:"Leeds is the largest legal and financial services center outside London, with significant strength in regional banking, insurance, legal services, retail headquarters, and professional services. The city has established itself as a major executive search market with depth across multiple sectors and a strong regional talent pool.\n\nThe Leeds economy spans financial services (regional banking, insurance, asset management), legal services (major national and international law firms), retail and consumer (headquarters and regional offices), digital and technology (growing tech sector), healthcare and life sciences, and professional services. The concentration of FTSE-listed businesses and PE portfolio companies in Yorkshire creates consistent demand for senior executive talent.\n\nLeeds' executive search market is characterized by strength in CFO and financial leadership searches, depth in legal and compliance appointments, and growing capability in technology and digital leadership as the sector expands. The talent pool combines locally-rooted executives with strong technical expertise and increasing inward migration from London and Manchester.\n\nKey hiring considerations include competition for proven commercial and revenue leadership talent (which remains more constrained than operational or financial talent), salary benchmarks that have risen significantly in technology and PE-backed businesses, and the importance of articulating career progression and development opportunities to attract candidates from larger markets.\n\nFor businesses recruiting in Leeds, understanding which talent pools are genuinely deep (finance, legal, operations) and which require broader geographic search (commercial leadership, technology) is essential to realistic hiring expectations.",
+    p:"Leeds is one of the strongest executive search markets in the North of England and the largest legal and financial services centre outside London. The city has significant depth in regional banking, insurance, legal services, retail headquarters and professional services, creating consistent demand for senior executive talent.\n\nThe Leeds economy spans financial services (regional banking, insurance, asset management), legal services (major national and international law firms), retail and consumer goods headquarters, digital and technology (growing tech sector), healthcare and life sciences, and professional services. The concentration of FTSE-listed businesses and PE portfolio companies in Yorkshire creates sustained executive hiring activity.\n\nOur Leeds executive search practice serves businesses across the city centre, Leeds Bradford corridor and the wider Yorkshire region. We work with regional banking operations, law firms, retail headquarters, healthcare organisations and a growing technology sector.\n\nThe talent pool combines locally rooted executives with strong technical expertise and deep regional networks alongside increasing inward migration from London and Manchester as Leeds' reputation as a headquarters location strengthens.\n\nKey hiring considerations include strong competition for proven commercial and revenue leadership talent (which remains more constrained than operational or financial talent), salary benchmarks that have risen significantly in technology and PE-backed businesses, and the importance of articulating career progression opportunities to attract candidates from larger markets. We understand which talent pools in Leeds are genuinely deep (finance, legal, operations) and which require broader geographic search (commercial leadership, technology), ensuring realistic hiring expectations and successful outcomes.",
     roles:[
       {title:"CFO",link:"hire-cfo"},
       {title:"General Counsel",link:"hire-general-counsel"},
@@ -1100,12 +1150,12 @@ const LOCS = [
       {title:"COO",link:"hire-coo"},
       {title:"Chief People Officer",link:"hire-cpo"},
       {title:"Non-Executive Director",link:"hire-ned"},
-      {title:"Managing Director",link:"hire-ceo"}
+      {title:"Managing Director",link:"hire-md"}
     ]
   },
   {
     c:"Bristol",
-    p:"Bristol has emerged as one of the UK's most dynamic executive search markets outside London, with particular strength in technology and digital, aerospace and defense, media and creative industries, financial and professional services, and environmental and sustainability sectors. The city has established itself as a genuine alternative headquarters location for high-growth and scale-up businesses.\n\nThe Bristol and South West economy is characterized by a diverse base spanning aerospace and defense engineering, technology and digital (strong software and hardware sectors), media and creative industries, financial services, environmental technology and sustainability, and higher education and research. Major employers include Airbus, BAE Systems, significant technology scale-ups, and media production businesses.\n\nBristol's executive search market is distinguished by strong demand for CTO and technology leadership talent, depth in aerospace and engineering leadership, and growing sophistication in scale-up CEO and commercial leadership appointments. The talent pool combines strong local retention of university graduates (Bristol and Bath universities) with increasing inward migration from London as Bristol establishes itself as a quality-of-life destination.\n\nKey hiring dynamics include intense competition for proven technology leadership (particularly CTOs with scaling experience), aerospace and defense searches requiring security clearance and sector-specific expertise, and scale-up businesses competing for commercial leadership talent against well-funded competitors. Equity expectations in Bristol's technology sector have risen significantly.\n\nFor businesses recruiting Bristol-based executives, particularly in technology and aerospace, working with headhunters who have genuine local networks and understand the specific talent dynamics of the South West market is critical.",
+    p:"Bristol is the leading executive search market in the South West and has emerged as one of the UK's most dynamic markets outside London, with particular strength in aerospace and defence, technology and digital, media and creative industries, and financial services. The city has established itself as a genuine alternative headquarters location for high-growth and scale-up businesses.\n\nThe Bristol and South West economy is characterised by aerospace and defence engineering (anchored by Airbus, Rolls-Royce and a deep supply chain), technology and digital (strong software and hardware sectors), media and creative industries, financial services, environmental technology and sustainability sectors, and higher education and research.\n\nOur Bristol executive search practice operates across the city centre, the aerospace corridor through Filton and Patchway, the harbourside technology district and the wider South West region. We work with aerospace primes and tier-1 suppliers, technology scale-ups, media production businesses and regional headquarters.\n\nThe talent pool combines strong local retention of university graduates from Bristol and Bath universities with increasing inward migration from London as Bristol establishes itself as a quality-of-life destination that doesn't compromise on career opportunity.\n\nKey hiring dynamics include intense competition for proven technology leadership (particularly CTOs with scaling experience), aerospace and defence searches requiring security clearance and sector-specific expertise, scale-up businesses competing for commercial leadership talent against well-funded competitors, and salary and equity expectations in Bristol's technology sector that have risen significantly. We bring deep networks across Bristol's aerospace, technology and professional services communities and understand the specific talent dynamics that make the South West market distinct.",
     roles:[
       {title:"CTO",link:"hire-cto"},
       {title:"CEO",link:"hire-ceo"},
@@ -1113,27 +1163,27 @@ const LOCS = [
       {title:"CRO",link:"hire-cro"},
       {title:"CMO",link:"hire-cmo"},
       {title:"CFO",link:"hire-cfo"},
-      {title:"Managing Director",link:"hire-ceo"},
+      {title:"Managing Director",link:"hire-md"},
       {title:"Non-Executive Director",link:"hire-ned"}
     ]
   },
   {
     c:"Glasgow",
-    p:"Glasgow is Scotland's largest city and most diverse economy, with significant executive search activity across financial services, technology and digital, healthcare and life sciences, manufacturing and engineering, higher education, and public sector. The city represents a substantial regional talent market with depth across operational, technical, and commercial leadership.\n\nThe Glasgow economy spans financial services (banking, insurance, asset management), technology and digital (growing software and fintech sectors), healthcare and life sciences (major hospital systems and pharmaceutical presence), advanced manufacturing and engineering, renewable energy and sustainability, and substantial public sector and higher education institutions. The presence of major corporate headquarters and PE-backed businesses creates consistent senior hiring demand.\n\nGlasgow's executive search market is characterized by strength in operational leadership searches (COO, Operations Directors, Engineering Directors), growing technology and digital capability, and depth in healthcare and public sector leadership appointments. The talent pool is operationally strong, technically credible in engineering and manufacturing, and increasingly sophisticated in commercial and technology roles.\n\nKey hiring considerations include competition for candidates who combine operational depth with strategic and commercial capability, salary expectations that reflect Scotland's market while remaining competitive with Edinburgh and Northern England, and the importance of organizational culture and values alignment in attracting senior talent in Glasgow's relationship-driven market.\n\nFor businesses recruiting Glasgow-based executives, understanding the strength in operational and technical talent pools and the relative constraints in pure commercial leadership is important for search strategy.",
+    p:"Glasgow is Scotland's largest city and most diverse economy, with significant executive search activity across financial services, technology and digital, healthcare and life sciences, manufacturing and engineering, and higher education and public sector. The city represents a substantial regional talent market with depth across operational, technical and commercial leadership.\n\nThe Glasgow economy spans financial services (banking, insurance, asset management), technology and digital (growing software and fintech sectors), healthcare and life sciences (major hospital systems and pharmaceutical presence), advanced manufacturing and engineering, renewable energy and sustainability, and substantial public sector institutions.\n\nOur Glasgow executive search practice serves businesses across the city centre, the West End, the Clyde waterfront regeneration area and the wider west of Scotland region. We work with financial services businesses, manufacturing and engineering companies, healthcare organisations, technology scale-ups and government-facing institutions. The wider west of Scotland supports senior hiring across shipbuilding, defence, renewables and infrastructure with strong links to Aberdeen's energy sector and Edinburgh's financial services market.\n\nThe talent pool is operationally strong, technically credible in engineering and manufacturing, and increasingly sophisticated in commercial and technology roles. Glasgow executives value organisational culture and long-term stability alongside compensation.\n\nKey hiring considerations include competition for candidates who combine operational depth with strategic and commercial capability, salary expectations that reflect Scotland's market while remaining competitive with Edinburgh and Northern England, and the importance of organisational culture and values alignment in attracting senior talent in Glasgow's relationship-driven market. We bring established networks across Glasgow's operational, technical and financial services communities and understand the nuances of recruiting senior executives who value both career opportunity and quality of life in Scotland.",
     roles:[
       {title:"COO",link:"hire-coo"},
       {title:"CEO",link:"hire-ceo"},
       {title:"CTO",link:"hire-cto"},
       {title:"CFO",link:"hire-cfo"},
       {title:"Chief People Officer",link:"hire-cpo"},
-      {title:"Managing Director",link:"hire-ceo"},
+      {title:"Managing Director",link:"hire-md"},
       {title:"Operations Director",link:"hire-coo"},
       {title:"Non-Executive Director",link:"hire-ned"}
     ]
   },
   {
     c:"Cambridge",
-    p:"Cambridge represents one of the UK's most specialized and sophisticated executive search markets, with world-leading depth in life sciences and biotechnology, technology and software, deeptech and hardware, medtech and diagnostics, and university spin-out and research commercialization. The city's unique ecosystem combines academic excellence, venture capital, and entrepreneurial capability in a concentrated geography.\n\nThe Cambridge economy is anchored by life sciences and biotechnology (one of Europe's largest clusters), technology and software (particularly AI, semiconductors, and enterprise software), medtech and diagnostics, academic research commercialization, and growing cleantech and sustainability sectors. The proximity and relationship with Cambridge University creates a continuous pipeline of spin-outs and research-led businesses requiring senior commercial and operational leadership.\n\nCambridge's executive search market is distinguished by demand for scientifically credible CEOs and Chief Scientific Officers, proven biotechnology CFOs who understand venture and institutional investor expectations, and commercial leaders (CROs, VPs Commercial) who can translate complex technology into market traction. The talent pool is globally competitive — Cambridge searches routinely compete with Oxford, Boston/Cambridge MA, and Bay Area opportunities.\n\nKey hiring dynamics include intense competition for candidates who combine scientific credibility with commercial and leadership capability, equity and compensation expectations influenced by US biotech markets, the critical importance of investor credibility and fundraising track record for CEO and CFO appointments, and the highly networked nature of the Cambridge ecosystem where reputation and referrals matter enormously.\n\nFor life sciences and deeptech businesses recruiting in Cambridge, working with headhunters who have genuine scientific networks, understand venture investor expectations, and can position opportunities credibly within the global life sciences talent market is essential.",
+    p:"Cambridge represents one of the UK's most specialised and sophisticated executive search markets, with world-leading depth in life sciences and biotechnology, technology and software, deeptech and hardware, medtech and diagnostics, and university spin-out and research commercialisation. The city's unique ecosystem combines academic excellence, venture capital and entrepreneurial capability in a concentrated geography.\n\nThe Cambridge economy is anchored by life sciences and biotechnology (one of Europe's largest clusters), technology and software (particularly AI, semiconductors and enterprise software), medtech and diagnostics, academic research commercialisation and growing cleantech and sustainability sectors. The proximity and relationship with Cambridge University creates a continuous pipeline of spin-outs and research-led businesses requiring senior commercial and operational leadership.\n\nOur Cambridge executive search practice operates across the Cambridge Science Park, Biomedical Campus, city centre and the wider Cambridge cluster. We work with biotech and pharma companies, deeptech ventures, university spin-outs, medtech businesses and established technology companies. Our network includes investors, board members and the scientific and commercial leadership community that makes Cambridge globally distinctive.\n\nThe talent pool is globally competitive — Cambridge searches routinely compete with Oxford, Boston/Cambridge MA and Bay Area opportunities. The market is exceptionally strong in scientific and technical leadership but thinner in commercial and scale-up operational experience, meaning many searches require looking beyond Cambridge for candidates who combine sector knowledge with commercial capability.\n\nKey hiring dynamics include intense competition for candidates who combine scientific credibility with commercial and leadership capability, equity and compensation expectations influenced by US biotech markets, the critical importance of investor credibility and fundraising track record for CEO and CFO appointments, and the highly networked nature of the Cambridge ecosystem where reputation and referrals matter enormously. We bring deep relationships across Cambridge's life sciences and technology community and understand how to position opportunities credibly within the global life sciences and deeptech talent markets.",
     roles:[
       {title:"CEO",link:"hire-ceo"},
       {title:"CTO",link:"hire-cto"},
@@ -1147,11 +1197,11 @@ const LOCS = [
   },
   {
     c:"Cardiff",
-    p:"Cardiff is Wales' capital and primary commercial center, with executive search activity concentrated in public sector and government, financial services (particularly insurance and retail banking), media and broadcasting (significant BBC and S4C presence), professional services, and healthcare. The city represents the strongest executive talent market in Wales with particular depth in public sector leadership and regulated industries.\n\nThe Cardiff economy is anchored by public sector and government (Welsh Government, agencies, and related bodies), financial services (Admiral Group, Principality Building Society, major insurer presence), media and broadcasting, professional services (law, accounting, consulting), higher education, and healthcare (major hospital systems). The concentration of public sector and regulated businesses creates specific executive search dynamics.\n\nCardiff's executive search market is characterized by strength in public sector and government-facing leadership appointments, depth in financial services (particularly insurance), and growing commercial sector capability as Cardiff attracts more private sector headquarters. The talent pool is stable, locally rooted, and values organizational mission and public benefit alongside commercial considerations.\n\nKey hiring considerations include salary expectations that reflect Cardiff's cost base and public sector influence, the importance of cultural alignment and organizational values in attracting senior talent, competition from established institutions with strong employer brands, and the relatively smaller pool of proven commercial and technology leadership compared to operational and financial talent.\n\nFor businesses recruiting Cardiff-based executives, particularly in public sector, healthcare, and financial services, understanding the local market dynamics and the importance of mission and values alignment is critical.",
+    p:"Cardiff is Wales' capital and primary commercial centre, with executive search activity concentrated in public sector and government, financial services (particularly insurance and retail banking), media and broadcasting, professional services, and healthcare. The city represents the strongest executive talent market in Wales with particular depth in public sector leadership and regulated industries.\n\nThe Cardiff economy is anchored by public sector and government (Welsh Government, agencies and related bodies), financial services (Admiral Group, Principality Building Society and major insurer presence), media and broadcasting (significant BBC and S4C presence), professional services (law, accounting, consulting), higher education, and healthcare (major hospital systems). The wider South Wales economy supports senior hiring across advanced manufacturing, automotive (including the growing EV supply chain), defence and healthcare.\n\nOur Cardiff executive search practice serves businesses and organisations across the city centre, Cardiff Bay, the M4 corridor and the wider South Wales region. We work with public sector bodies, financial services institutions, media organisations, professional services firms and healthcare providers.\n\nThe talent pool is stable, locally rooted and values organisational mission and public benefit alongside commercial considerations. Cardiff attracts executives who prioritise quality of life, reasonable cost of living and meaningful work over maximum compensation.\n\nKey hiring considerations include salary expectations that reflect Cardiff's cost base and public sector influence, the importance of cultural alignment and organisational values in attracting senior talent, competition from established institutions with strong employer brands, and a relatively smaller pool of proven commercial and technology leadership compared to operational and financial talent. We understand the Cardiff and South Wales market dynamics, the importance of mission and values alignment, and can position opportunities credibly to candidates who value both career impact and quality of life in Wales.",
     roles:[
       {title:"CEO",link:"hire-ceo"},
       {title:"CFO",link:"hire-cfo"},
-      {title:"Managing Director",link:"hire-ceo"},
+      {title:"Managing Director",link:"hire-md"},
       {title:"Chief People Officer",link:"hire-cpo"},
       {title:"COO",link:"hire-coo"},
       {title:"General Counsel",link:"hire-general-counsel"},
@@ -1167,14 +1217,14 @@ const LOCS = [
       {title:"CTO",link:"hire-cto"},
       {title:"CFO",link:"hire-cfo"},
       {title:"Operations Director",link:"hire-coo"},
-      {title:"Managing Director",link:"hire-ceo"},
+      {title:"Managing Director",link:"hire-md"},
       {title:"Chief People Officer",link:"hire-cpo"},
       {title:"Non-Executive Director",link:"hire-ned"}
     ]
   }
 ];
 
-const SECTORS = [
+export const SECTORS = [
   {id:"financial-services",icon:"🏦",name:"Financial Services",desc:"Banking, asset management, insurance, private equity, wealth management",intro:"Financial services is one of the most active sectors for executive search in the UK. The breadth of the sector — spanning retail banking, investment management, insurance, private equity, wealth management, and fintech — means that the talent pools for senior roles are often narrow and highly contested.",roles:["CEO / Managing Director","CFO / Finance Director","CRO / Chief Risk Officer","CTO / Chief Digital Officer","Head of Compliance","Fund Manager / CIO","COO","General Counsel"],challenges:"Senior hiring in financial services is complicated by FCA/PRA Senior Managers and Certification Regime, extensive background verification obligations, and highly competitive compensation benchmarks.",whySearch:"The active candidate pool for director-level financial services roles is exceptionally small. The combination of regulatory scrutiny, confidentiality requirements, and the passive nature of the best talent makes retained executive search the standard approach.",fees:"25–33% of total compensation for most director and C-suite roles."},
   {id:"technology-digital",icon:"💻",name:"Technology & Digital",desc:"SaaS, fintech, cybersecurity, AI/ML, enterprise software",intro:"Technology is the fastest-moving executive search market in the UK. The pace of change in AI, cloud, cybersecurity, and software has created acute demand for senior leadership talent that significantly exceeds supply.",roles:["CTO / VP Engineering","CPO / VP Product","CISO / Head of Security","CRO / VP Sales","CEO (Scale-up)","CDO / Chief Data Officer","Head of AI/ML","VP / Director of Engineering"],challenges:"Technology leadership roles carry unique challenges: rapidly evolving skill requirements around AI and ML, equity benchmarks that vary enormously between early-stage and enterprise environments.",whySearch:"The most capable technology leaders are not looking. The best CTOs and CPOs are building products, not scanning job boards. Reaching them requires a network-led, research-driven approach.",fees:"25–33% of total compensation."},
   {id:"healthcare-life-sciences",icon:"🏥",name:"Healthcare & Life Sciences",desc:"Pharma, biotech, medtech, NHS, private healthcare",intro:"Healthcare and life sciences is a sector where the consequences of poor senior hiring are particularly acute. The sector spans global pharmaceutical businesses, early-stage biotech, medical devices, digital health, and NHS/public sector leadership.",roles:["CEO / General Manager","CMO / Chief Medical Officer","CSO / Chief Scientific Officer","CFO","VP Clinical Development","VP Commercial / Sales","Regulatory Affairs Director","Medical Director"],challenges:"Life sciences roles often require rare combinations of scientific credibility, commercial acumen, and regulatory understanding. The global nature of the talent market means UK searches frequently require international reach.",whySearch:"For biotech and pharma leadership, the addressable candidate pool is genuinely small and globally dispersed. Specialist sector knowledge and a built network are prerequisites.",fees:"25–33% of total compensation for commercial leadership roles."},
@@ -1191,7 +1241,7 @@ const SECTORS = [
   {id:"space-security",icon:"🛰️",name:"Space & Security",desc:"Space technology, satellites, cyber security, national security",intro:"Space and security is the UK's fastest-growing strategic sector. The convergence of commercial space, satellite communications, cyber defence, and national security infrastructure has created a new category of senior leadership demand. Roles combine deep technical expertise, security clearance, investor relations, and government stakeholder management in a uniquely complex operating environment.",roles:["CEO / Founder-CEO","CTO / Chief Engineer","COO / Operations Director","Chief Scientist / CSO","Commercial Director","CFO (dual-use / defence)","Head of Government & Strategy","VP Engineering (Space Systems)"],challenges:"Space and security leadership requires extremely rare skill combinations — technical depth in aerospace or cyber, credibility with government and defence customers, investor or board management capability, and often Developed Vetting (DV) clearance. The addressable candidate pool is genuinely small and globally competitive. Many of the best candidates are in the US or continental Europe.",whySearch:"This is one of the most challenging talent markets in the UK. The number of individuals with the right combination of space/cyber technical background, commercial leadership experience, and active security clearance is measured in dozens, not hundreds. Proactive, research-led executive search with international reach is essential. Advertising will not surface credible candidates.",fees:"28–35% of total compensation, reflecting scarcity and international competition."}
 ];
 
-const INDUSTRY_PAGES = [
+export const INDUSTRY_PAGES = [
   {id:"saas-scaleup",icon:"🚀",title:"Executive Search for SaaS Scale-Ups",subtitle:"Proven leadership talent for high-growth software companies",intro:"SaaS scale-ups face unique hiring challenges. You need executives who have scaled before, understand recurring revenue models, and can operate at the pace growth demands. The best candidates are building successful companies right now — not browsing job boards.",challenges:["Finding leaders with genuine 0-100 scaling experience","Competing for talent against well-funded competitors","Balancing equity vs cash compensation","Building exec teams that can grow with the company"],roles:["CEO (post-Series A/B)","CRO / VP Sales","CPO / VP Product","CTO / VP Engineering","CFO (pre-IPO ready)","CMO / VP Marketing"],whyUse:"The best SaaS executives are passive candidates receiving multiple approaches weekly. A specialist headhunter with a genuine SaaS network can reach candidates your LinkedIn searches cannot.",searchFee:"28–33% of total compensation",timeline:"8–14 weeks"},
   {id:"fintech",icon:"💳",title:"Executive Search for FinTech Companies",subtitle:"Leadership talent at the intersection of finance and technology",intro:"FinTech requires a rare combination: deep financial services credibility, technology fluency, regulatory understanding, and the ability to operate in a fast-moving environment. The talent pool that combines all four is exceptionally small.",challenges:["Finding leaders with both FS and tech backgrounds","Navigating FCA regulatory requirements","Competing against established banks and tech giants","Building credible leadership for investor confidence"],roles:["CEO","CFO (FCA approved)","CRO / Chief Risk Officer","CTO / Chief Technology Officer","CPO / Chief Product Officer","Head of Compliance"],whyUse:"FinTech executive searches require specialist knowledge of both financial services regulation and technology talent markets. Generic recruiters struggle with the nuance.",searchFee:"28–35% of total compensation",timeline:"12–16 weeks (allowing for regulatory approval)"},
   {id:"pe-portfolio",icon:"📊",title:"Executive Search for PE Portfolio Companies",subtitle:"Value creation leadership for private equity backed businesses",intro:"PE-backed businesses need executives who have created value in comparable situations. Not just strong operators — people who understand working with active investors, hitting defined milestones, and delivering against a clear investment thesis.",challenges:["Finding candidates with proven PE track records","Compressed timelines driven by deal dynamics","Structuring attractive management incentive plans","Balancing investor and management expectations"],roles:["CEO / Managing Director","CFO (PE experienced)","COO / Operations Director","Commercial Director / CRO","Transformation Director","Chair / NED"],whyUse:"The pool of executives with genuine PE value creation experience is small and well-known. A specialist PE headhunter has the relationships to reach them quickly.",searchFee:"28–35% of total compensation",timeline:"10–14 weeks"},
@@ -1204,7 +1254,20 @@ const INDUSTRY_PAGES = [
   {id:"logistics-supply-chain",icon:"📦",title:"Executive Search for Logistics & Supply Chain",subtitle:"Operations leadership for complex distribution and fulfilment",intro:"Modern logistics and supply chain leadership requires a blend of operational excellence, technology fluency, and commercial acumen. E-commerce growth has intensified demand for executives who can scale operations rapidly.",challenges:["Finding leaders with genuine scaling experience","Technology transformation of traditional operations","Managing 3PL relationships and in-house capabilities","Building teams that balance cost and service"],roles:["COO / Operations Director","VP Supply Chain","CFO","Head of Logistics","Director of Fulfilment","MD / General Manager"],whyUse:"The best logistics and supply chain leaders are deeply operational and rarely active in the market. Specialist headhunters reach them through established networks.",searchFee:"25–30% of total compensation",timeline:"10–14 weeks"}
 ];
 
-const SALARY = [
+export const FUNCTIONS = [
+  {id:"ceo",icon:"👔",name:"CEO",fullName:"Chief Executive Officer",desc:"Overall strategic direction and P&L accountability",intro:"",roles:[],challenges:"",whySearch:"",fees:""},
+  {id:"cfo",icon:"💰",name:"CFO",fullName:"Chief Financial Officer",desc:"Financial strategy, reporting, and investor relations",intro:"",roles:[],challenges:"",whySearch:"",fees:""},
+  {id:"coo",icon:"⚙️",name:"COO",fullName:"Chief Operating Officer",desc:"Day-to-day operations and operational excellence",intro:"",roles:[],challenges:"",whySearch:"",fees:""},
+  {id:"cto",icon:"💻",name:"CTO",fullName:"Chief Technology Officer",desc:"Technology strategy, engineering leadership, and innovation",intro:"",roles:[],challenges:"",whySearch:"",fees:""},
+  {id:"cmo",icon:"📢",name:"CMO",fullName:"Chief Marketing Officer",desc:"Brand strategy, customer acquisition, and marketing leadership",intro:"",roles:[],challenges:"",whySearch:"",fees:""},
+  {id:"chro",icon:"👥",name:"CHRO",fullName:"Chief Human Resources Officer",desc:"Talent strategy, culture, and people leadership",intro:"",roles:[],challenges:"",whySearch:"",fees:""},
+  {id:"cro",icon:"📈",name:"CRO",fullName:"Chief Revenue Officer",desc:"Revenue growth, sales, and commercial strategy",intro:"",roles:[],challenges:"",whySearch:"",fees:""},
+  {id:"cpo",icon:"🎯",name:"CPO",fullName:"Chief Product Officer",desc:"Product strategy, roadmap, and product leadership",intro:"",roles:[],challenges:"",whySearch:"",fees:""},
+  {id:"md",icon:"🏢",name:"MD",fullName:"Managing Director",desc:"Business unit or regional P&L leadership",intro:"",roles:[],challenges:"",whySearch:"",fees:""},
+  {id:"ciso",icon:"🔒",name:"CISO",fullName:"Chief Information Security Officer",desc:"Cybersecurity strategy and risk management",intro:"",roles:[],challenges:"",whySearch:"",fees:""}
+];
+
+export const SALARY = [
   {role:"CEO",low:100,mid:220,high:500},{role:"CFO",low:80,mid:160,high:350},
   {role:"COO",low:80,mid:155,high:320},{role:"CTO",low:85,mid:160,high:340},
   {role:"CMO",low:75,mid:130,high:260},{role:"CPO",low:75,mid:125,high:230},
@@ -1213,7 +1276,7 @@ const SALARY = [
   {role:"Finance Director",low:70,mid:105,high:190}
 ];
 
-const FAQS = [
+export const FAQS = [
   {q:"What is the difference between a headhunter and a recruiter?",a:"A headhunter proactively researches and approaches senior candidates — including those not actively looking. A recruiter typically advertises and screens applications. Headhunters access the full talent market; recruiters access only the 15–20% actively job-seeking."},
   {q:"How much does a headhunter charge in the UK?",a:"Retained search fees: 25–35% of first-year total compensation, most commonly ~30%. Contingent fees: 15–25% on placement. A £200k role typically costs £50k–£70k in retained search fees."},
   {q:"How long does an executive search take?",a:"Typically 10–14 weeks for director-level roles. CEO and board searches: 16–20 weeks."},
@@ -1222,7 +1285,7 @@ const FAQS = [
   {q:"What is retained executive search?",a:"A model where the client pays in three instalments — on engagement, at shortlist, and on accepted offer — regardless of outcome. The headhunter is exclusively committed to the assignment."}
 ];
 
-const ROLES_ESTIMATOR = [
+export const ROLES_ESTIMATOR = [
   {label:"CEO / Managing Director",tier:3},{label:"CFO / Finance Director",tier:3},
   {label:"COO / Operations Director",tier:3},{label:"CTO / Technology Director",tier:3},
   {label:"CMO / Marketing Director",tier:2},{label:"CHRO / HR Director",tier:2},
@@ -1232,1155 +1295,14 @@ const ROLES_ESTIMATOR = [
   {label:"Other Senior Role",tier:1}
 ];
 
-const URGENCY = [
+export const URGENCY = [
   {label:"Critical — 0–4 weeks",mult:1.1,weeks:"8–10 weeks"},
   {label:"Important — 1–3 months",mult:1.0,weeks:"10–14 weeks"},
   {label:"Planning — 3–6 months",mult:0.95,weeks:"10–16 weeks"},
   {label:"Exploratory",mult:0.9,weeks:"12–18 weeks"}
 ];
 
-const SCOPE = [
+export const SCOPE = [
   {label:"UK only",mult:1.0},{label:"UK + Europe",mult:1.08},
   {label:"International / Global",mult:1.15},{label:"Not sure yet",mult:1.0}
 ];
-
-// ─── COMPONENTS ──────────────────────────────────────────────────────
-
-function Btn({children,onClick,variant="primary",small=false}){
-  const s = variant==="primary"
-    ? {background:C.accent,color:"#fff",border:"none"}
-    : variant==="gold"
-    ? {background:C.gold,color:C.dark,border:"none"}
-    : {background:"transparent",color:C.accent,border:`1.5px solid ${C.accent}`};
-  return <button onClick={onClick} style={{...s,padding:small?"7px 14px":"11px 22px",borderRadius:6,fontSize:small?12:14,fontWeight:700,cursor:"pointer",transition:"opacity .15s"}}>{children}</button>;
-}
-
-function GoldBtn({children,onClick,small=false}){
-  return <button onClick={onClick} style={{background:C.gold,color:C.dark,border:"none",padding:small?"7px 14px":"11px 22px",borderRadius:6,fontSize:small?12:14,fontWeight:700,cursor:"pointer"}}>{children}</button>;
-}
-
-function CalendlyBtn({children,small=false}){
-  return <button onClick={()=>window.open(CALENDLY_URL,'_blank')} style={{background:`linear-gradient(135deg,${C.accent},${C.al})`,color:"#fff",border:"none",padding:small?"7px 14px":"12px 24px",borderRadius:6,fontSize:small?12:15,fontWeight:700,cursor:"pointer",boxShadow:"0 4px 12px rgba(15,76,117,0.3)",transition:"transform 0.2s"}} onMouseEnter={e=>e.currentTarget.style.transform="translateY(-2px)"} onMouseLeave={e=>e.currentTarget.style.transform="translateY(0)"}>{children}</button>;
-}
-
-function CalendlyCTA({style={}}){
-  return <div style={{background:`linear-gradient(135deg,${C.accent}11,${C.al}11)`,border:`2px solid ${C.accent}`,borderRadius:10,padding:"20px 24px",margin:"32px 0",...style}}>
-    <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:16}}>
-      <div style={{flex:1,minWidth:200}}>
-        <h3 style={{fontSize:18,fontWeight:700,color:C.dark,margin:"0 0 6px"}}>Ready to discuss your search?</h3>
-        <p style={{fontSize:14,color:C.tl,margin:0}}>Book a free 15-minute consultation with a specialist</p>
-      </div>
-      <CalendlyBtn>Book Free Consultation →</CalendlyBtn>
-    </div>
-  </div>;
-}
-
-function CallbackBanner({go}){
-  return <div style={{background:C.accent+"0D",border:`1px solid ${C.accent}22`,borderRadius:8,padding:"12px 16px",display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:10,marginBottom:20}}>
-    <div>
-      <span style={{fontSize:13,fontWeight:600,color:C.dark}}>Speak to a specialist consultant</span>
-      <span style={{fontSize:12,color:C.tl,marginLeft:8}}>Typical response within 2 hours</span>
-    </div>
-    <GoldBtn onClick={()=>go("contact")} small>Request a Callback →</GoldBtn>
-  </div>;
-}
-
-function SectionTitle({title,sub}){
-  return <div style={{textAlign:"center",marginBottom:32}}>
-    <h2 style={{fontSize:"clamp(22px,3vw,32px)",fontWeight:750,color:C.dark,margin:"0 0 8px"}}>{title}</h2>
-    {sub&&<p style={{fontSize:15,color:C.tl,margin:0}}>{sub}</p>}
-  </div>;
-}
-
-function Card({children,onClick,style={}}){
-  return <div onClick={onClick} style={{background:C.card,border:`1px solid ${C.bd}`,borderRadius:10,padding:"20px 18px",cursor:onClick?"pointer":"default",...style}}>{children}</div>;
-}
-
-function BackBtn({label,onClick}){
-  return <button onClick={onClick} style={{background:"none",border:"none",color:C.accent,fontSize:13,fontWeight:600,cursor:"pointer",padding:0,marginBottom:20}}>← {label||"Back"}</button>;
-}
-
-function renderBody(text){
-  return text.split("\n\n").map((para,pi)=>{
-    if(para.startsWith("|")){
-      const rows=para.trim().split("\n").filter(r=>!r.match(/^\|[-\s|]+\|$/));
-      return <div key={pi} style={{overflowX:"auto",margin:"14px 0"}}>
-        <table style={{width:"100%",borderCollapse:"collapse",fontSize:13}}>
-          {rows.map((row,ri)=>{
-            const cells=row.split("|").filter((_,ci)=>ci>0&&ci<row.split("|").length-1);
-            const Tag=ri===0?"th":"td";
-            return <tr key={ri} style={{background:ri===0?C.bl:ri%2===0?C.bg:C.card}}>
-              {cells.map((c,ci)=><Tag key={ci} style={{padding:"8px 10px",textAlign:"left",borderBottom:`1px solid ${C.bd}`,fontWeight:ri===0?700:400,fontSize:12}}>{c.trim()}</Tag>)}
-            </tr>;
-          })}
-        </table>
-      </div>;
-    }
-    const lines=para.split("\n");
-    return <p key={pi} style={{fontSize:14,lineHeight:1.75,color:C.tx,margin:"0 0 12px"}}>
-      {lines.map((line,li)=>{
-        const parts=line.split(/(\*\*[^*]+\*\*)/g);
-        return <React.Fragment key={li}>
-          {li>0&&<br/>}
-          {parts.map((p,pj)=>p.startsWith("**")&&p.endsWith("**")?<strong key={pj}>{p.slice(2,-2)}</strong>:<React.Fragment key={pj}>{p}</React.Fragment>)}
-        </React.Fragment>;
-      })}
-    </p>;
-  });
-}
-
-// ─── PAGES ─────────────────────────────────────────────────────────────────
-
-function HomePage({go}){
-  const [fOpen,setFOpen]=useState(null);
-  return <div>
-    <section style={{background:`linear-gradient(135deg,${C.dark} 0%,${C.navy} 60%,${C.accent} 100%)`,padding:"100px 20px 70px",textAlign:"center"}}>
-      <div style={{maxWidth:780,margin:"0 auto"}}>
-        <div style={{display:"inline-block",background:C.gold+"22",border:`1px solid ${C.gold}44`,borderRadius:20,padding:"4px 14px",fontSize:12,color:C.gold,fontWeight:600,marginBottom:16}}>UK's leading executive search resource</div>
-        <h1 style={{fontSize:"clamp(32px,5vw,58px)",fontWeight:800,color:"#fff",lineHeight:1.1,margin:"0 0 18px",letterSpacing:"-1px"}}>The UK's Authority on<br/><span style={{color:C.gold}}>Executive Search</span></h1>
-        <p style={{fontSize:"clamp(15px,2vw,18px)",color:"#ffffffbb",lineHeight:1.6,margin:"0 0 32px"}}>Comprehensive guides, salary benchmarks, and free tools to help business leaders make better senior hiring decisions.</p>
-        <div style={{display:"flex",gap:12,justifyContent:"center",flexWrap:"wrap"}}>
-          <CalendlyBtn>Book Free Consultation</CalendlyBtn>
-          <GoldBtn onClick={()=>go("estimator")}>Calculate Your Fee</GoldBtn>
-        </div>
-        <p style={{fontSize:12,color:"#ffffff66",marginTop:14}}>⚡ Free 15-min consultation · No obligation · Expert advice</p>
-      </div>
-    </section>
-
-    <div style={{background:C.accent,padding:"14px 20px",textAlign:"center"}}>
-      <span style={{color:"#fff",fontSize:14,fontWeight:600}}>Ready to discuss your search? </span>
-      <button onClick={()=>window.open(CALENDLY_URL,'_blank')} style={{background:C.gold,color:C.dark,border:"none",padding:"7px 16px",borderRadius:5,fontSize:13,fontWeight:700,cursor:"pointer",marginLeft:10,boxShadow:"0 2px 8px rgba(0,0,0,0.2)"}}>Book 15-Min Consultation (Free) →</button>
-    </div>
-
-    <section style={{padding:"56px 20px",background:C.bg}}>
-      <div style={{maxWidth:1140,margin:"0 auto"}}>
-        <SectionTitle title="Knowledge Hub" sub="Eight definitive guides to executive search — written by practitioners"/>
-        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(280px,1fr))",gap:14}}>
-          {GUIDES.map(g=><Card key={g.id} onClick={()=>go("guide:"+g.id)}>
-            <div style={{display:"flex",justifyContent:"space-between",marginBottom:10}}>
-              <span style={{fontSize:26}}>{g.icon}</span>
-              <span style={{background:C.accent+"15",color:C.accent,fontSize:11,fontWeight:600,padding:"3px 8px",borderRadius:4}}>{g.tag}</span>
-            </div>
-            <h3 style={{fontSize:15,fontWeight:700,color:C.dark,margin:"0 0 6px"}}>{g.title}</h3>
-            <p style={{fontSize:13,color:C.tl,lineHeight:1.5,margin:"0 0 12px"}}>{g.subtitle}</p>
-            <span style={{fontSize:12,color:C.tl}}>⏱ {g.time}</span>
-          </Card>)}
-        </div>
-      </div>
-    </section>
-
-    <section style={{padding:"48px 20px",background:C.card}}>
-      <div style={{maxWidth:1140,margin:"0 auto"}}>
-        <SectionTitle title="How to Hire Executive Roles" sub="Complete guides with salary benchmarks, interview questions, and hiring strategies"/>
-        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(280px,1fr))",gap:14}}>
-          {INTENT_PAGES.filter(p=>p.responsibilities).map(p=><Card key={p.id} onClick={()=>go("intent:"+p.id)}>
-            <span style={{fontSize:32,marginBottom:12,display:"block"}}>{p.icon}</span>
-            <h3 style={{fontSize:16,fontWeight:700,color:C.dark,margin:"0 0 8px"}}>{p.title}</h3>
-            <div style={{fontSize:13,color:C.tl,marginBottom:12,lineHeight:1.5}}>{p.intro.split('\n\n')[0].substring(0,140)}...</div>
-            <div style={{display:"grid",gap:6,fontSize:12}}>
-              <div style={{display:"flex",justifyContent:"space-between",padding:"6px 0",borderTop:`1px solid ${C.bl}`}}>
-                <span style={{color:C.tl}}>Salary Range:</span>
-                <span style={{fontWeight:600,color:C.accent}}>{p.salaryRange.split(' ')[0]}</span>
-              </div>
-              <div style={{display:"flex",justifyContent:"space-between",padding:"6px 0",borderTop:`1px solid ${C.bl}`}}>
-                <span style={{color:C.tl}}>Timeline:</span>
-                <span style={{fontWeight:600,color:C.dark}}>{p.timeline}</span>
-              </div>
-            </div>
-          </Card>)}
-        </div>
-      </div>
-    </section>
-
-    <section style={{padding:"48px 20px",background:C.bg}}>
-      <div style={{maxWidth:1140,margin:"0 auto"}}>
-        <SectionTitle title="Free Tools" sub="Interactive calculators and decision aids for senior hiring"/>
-        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(280px,1fr))",gap:14}}>
-          {[
-            {icon:"🧮",t:"Enhanced ROI Calculator",d:"Get a complete fee estimate with bad-hire cost breakdown and ROI analysis for your search.",pg:"estimator",gold:true},
-            {icon:"❓",t:"Do I Need a Headhunter?",d:"5 questions, instant recommendation on whether retained search is the right approach for your hire.",pg:"quiz",gold:true},
-            {icon:"📅",t:"Book Free Consultation",d:"15-minute call with a specialist consultant. Discuss your search requirements and get expert advice.",action:()=>window.open(CALENDLY_URL,'_blank'),gold:false},
-            {icon:"📋",t:"Brief a Headhunter",d:"Submit your requirements and get a response within 2 hours during business hours.",pg:"contact",gold:false}
-          ].map(tool=><Card key={tool.t} onClick={tool.action||(() =>go(tool.pg))}>
-            <span style={{fontSize:28,marginBottom:10,display:"block"}}>{tool.icon}</span>
-            <h3 style={{fontSize:15,fontWeight:700,color:C.dark,margin:"0 0 6px"}}>{tool.t}</h3>
-            <p style={{fontSize:13,color:C.tl,lineHeight:1.5,margin:"0 0 14px"}}>{tool.d}</p>
-            {tool.action?<CalendlyBtn small>Book Now →</CalendlyBtn>:<GoldBtn onClick={tool.action||(()=>go(tool.pg))} small>Open →</GoldBtn>}
-          </Card>)}
-        </div>
-      </div>
-    </section>
-
-    <section style={{padding:"48px 20px",background:C.bg}}>
-      <div style={{maxWidth:820,margin:"0 auto"}}>
-        <SectionTitle title="UK Senior Executive Salary Benchmarks 2026"/>
-        <Card>
-          <div style={{overflowX:"auto"}}>
-            <table style={{width:"100%",borderCollapse:"collapse",fontSize:13}}>
-              <thead><tr style={{background:C.bl}}>{["Role","Low","Mid","High"].map(h=><th key={h} style={{padding:"9px 12px",textAlign:h==="Role"?"left":"right",fontWeight:700,color:C.dark,borderBottom:`1px solid ${C.bd}`,fontSize:12}}>{h}</th>)}</tr></thead>
-              <tbody>{SALARY.map((r,i)=><tr key={i} style={{borderBottom:`1px solid ${C.bl}`}}>
-                <td style={{padding:"9px 12px",fontWeight:600,color:C.dark}}>{r.role}</td>
-                <td style={{padding:"9px 12px",textAlign:"right",color:C.tl}}>£{r.low}k</td>
-                <td style={{padding:"9px 12px",textAlign:"right",color:C.accent,fontWeight:700}}>£{r.mid}k</td>
-                <td style={{padding:"9px 12px",textAlign:"right",color:C.tl}}>£{r.high}k+</td>
-              </tr>)}</tbody>
-            </table>
-          </div>
-          <p style={{fontSize:11,color:C.tl,margin:"10px 0 0"}}>Base salary + anticipated annual bonus. UK market data, March 2026.</p>
-        </Card>
-      </div>
-    </section>
-
-    <section style={{padding:"48px 20px",background:C.card}}>
-      <div style={{maxWidth:1140,margin:"0 auto"}}>
-        <SectionTitle title="Industry Expertise" sub="Specialist search for high-growth sectors"/>
-        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(240px,1fr))",gap:12}}>
-          {INDUSTRY_PAGES.slice(0,6).map(p=><Card key={p.id} onClick={()=>go("industry:"+p.id)} style={{padding:"18px 16px"}}>
-            <div style={{fontSize:28,marginBottom:8}}>{p.icon}</div>
-            <h3 style={{fontSize:14,fontWeight:700,color:C.dark,margin:"0 0 4px"}}>{p.title.replace("Executive Search for ","")}</h3>
-            <p style={{fontSize:12,color:C.tl,margin:0,lineHeight:1.4}}>{p.subtitle}</p>
-          </Card>)}
-        </div>
-        <div style={{textAlign:"center",marginTop:20}}>
-          <Btn onClick={()=>go("industries")}>View All Industries →</Btn>
-        </div>
-      </div>
-    </section>
-
-    <section style={{padding:"48px 20px",background:C.bg}}>
-      <div style={{maxWidth:1140,margin:"0 auto"}}>
-        <SectionTitle title="Executive Search by Sector"/>
-        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(155px,1fr))",gap:8}}>
-          {SECTORS.map((s,i)=><Card key={i} onClick={()=>go("sector:"+s.id)} style={{padding:"14px 12px",textAlign:"center"}}>
-            <div style={{fontSize:22,marginBottom:6}}>{s.icon}</div>
-            <div style={{fontSize:12,fontWeight:700,color:C.dark}}>{s.name}</div>
-          </Card>)}
-        </div>
-      </div>
-    </section>
-
-    <section style={{padding:"48px 20px",background:C.bg}}>
-      <div style={{maxWidth:1140,margin:"0 auto"}}>
-        <SectionTitle title="Comparison Guides" sub="Understanding your options before you hire"/>
-        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(240px,1fr))",gap:10}}>
-          {COMPARISONS.map(c=><Card key={c.id} onClick={()=>go("compare:"+c.id)} style={{padding:"16px 14px"}}>
-            <span style={{fontSize:22,marginBottom:6,display:"block"}}>{c.icon}</span>
-            <h3 style={{fontSize:13,fontWeight:700,color:C.dark,margin:"0 0 4px"}}>{c.title}</h3>
-            <p style={{fontSize:12,color:C.tl,margin:0,lineHeight:1.4}}>{c.subtitle.substring(0,80)}...</p>
-          </Card>)}
-        </div>
-      </div>
-    </section>
-
-    <section style={{padding:"48px 20px",background:C.card}}>
-      <div style={{maxWidth:1140,margin:"0 auto"}}>
-        <SectionTitle title="UK Locations" sub="Find headhunters across the UK"/>
-        <div style={{display:"flex",flexWrap:"wrap",gap:8,justifyContent:"center"}}>
-          {LOCS.map((l,i)=><button key={i} onClick={()=>go("loc:"+l.c.toLowerCase())} style={{background:C.bg,border:`1px solid ${C.bd}`,borderRadius:6,padding:"8px 18px",fontSize:13,fontWeight:600,color:C.dark,cursor:"pointer"}}>📍 {l.c}</button>)}
-        </div>
-      </div>
-    </section>
-
-    <section style={{padding:"48px 20px",background:C.bg}}>
-      <div style={{maxWidth:720,margin:"0 auto"}}>
-        <SectionTitle title="Frequently Asked Questions"/>
-        {FAQS.map((f,i)=><div key={i} style={{borderBottom:`1px solid ${C.bd}`}}>
-          <div onClick={()=>setFOpen(fOpen===i?null:i)} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"14px 0",cursor:"pointer"}}>
-            <span style={{fontSize:14,fontWeight:600,color:C.dark,paddingRight:12}}>{f.q}</span>
-            <span style={{color:C.accent,fontWeight:700,fontSize:18,flexShrink:0}}>{fOpen===i?"−":"+"}</span>
-          </div>
-          {fOpen===i&&<p style={{fontSize:13,color:C.tl,lineHeight:1.65,paddingBottom:14,margin:0}}>{f.a}</p>}
-        </div>)}
-      </div>
-    </section>
-
-    <section style={{padding:"56px 20px",background:`linear-gradient(135deg,${C.dark},${C.accent})`,textAlign:"center"}}>
-      <div style={{maxWidth:600,margin:"0 auto"}}>
-        <h2 style={{fontSize:"clamp(22px,3vw,32px)",fontWeight:750,color:"#fff",margin:"0 0 8px"}}>Ready to start your search?</h2>
-        <p style={{fontSize:16,color:"#ffffffbb",margin:"0 0 8px"}}>Book a free 15-minute consultation with a specialist.</p>
-        <p style={{fontSize:13,color:C.gold,margin:"0 0 24px",fontWeight:600}}>⚡ No obligation · Expert advice · Available today</p>
-        <div style={{display:"flex",gap:12,justifyContent:"center",flexWrap:"wrap"}}>
-          <CalendlyBtn>Book Free Consultation</CalendlyBtn>
-          <GoldBtn onClick={()=>go("estimator")}>Calculate Your Fee</GoldBtn>
-        </div>
-      </div>
-    </section>
-  </div>;
-}
-
-function GuidesPage({go}){
-  return <div style={{padding:"60px 20px 80px",maxWidth:1100,margin:"0 auto"}}>
-    <BackBtn label="Home" onClick={()=>go("home")}/>
-    <SectionTitle title="Comprehensive Guides"/>
-    <p style={{fontSize:15,color:C.tl,maxWidth:700,margin:"0 auto 40px",textAlign:"center"}}>
-      Expert guides covering every aspect of executive search and headhunting in the UK.
-    </p>
-    <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(300px,1fr))",gap:20}}>
-      {GUIDES.map(g=><div key={g.id} onClick={()=>go(`guide:${g.id}`)} style={{background:C.card,border:`1px solid ${C.bd}`,borderRadius:8,padding:24,cursor:"pointer",transition:"all 0.2s",boxShadow:"0 1px 3px rgba(0,0,0,0.05)"}} onMouseEnter={e=>{e.currentTarget.style.boxShadow="0 4px 12px rgba(0,0,0,0.1)";e.currentTarget.style.borderColor=C.accent;}} onMouseLeave={e=>{e.currentTarget.style.boxShadow="0 1px 3px rgba(0,0,0,0.05)";e.currentTarget.style.borderColor=C.bd;}}>
-        <div style={{fontSize:32,marginBottom:12}}>{g.icon}</div>
-        {g.tag&&<span style={{display:"inline-block",background:C.gold,color:"#fff",fontSize:10,fontWeight:700,padding:"3px 8px",borderRadius:4,marginBottom:8}}>{g.tag}</span>}
-        <h3 style={{fontSize:18,fontWeight:700,color:C.tx,margin:"0 0 8px"}}>{g.title}</h3>
-        <p style={{fontSize:13,color:C.tl,lineHeight:1.5,margin:"0 0 12px"}}>{g.subtitle}</p>
-        <div style={{fontSize:11,color:C.accent,fontWeight:600}}>{g.time} →</div>
-      </div>)}
-    </div>
-  </div>;
-}
-function GuidePage({guide,go}){
-  const midPoint=Math.floor(guide.sections.length/2);
-  return <div style={{padding:"60px 20px 80px",maxWidth:800,margin:"0 auto"}}>
-    <BackBtn label="All Guides" onClick={()=>go("guides")}/>
-    <div style={{textAlign:"center",marginBottom:40}}>
-      <div style={{fontSize:48,marginBottom:12}}>{guide.icon}</div>
-      <h1 style={{fontSize:"clamp(26px,4vw,38px)",fontWeight:750,color:C.tx,margin:"0 0 12px"}}>{guide.title}</h1>
-      <p style={{fontSize:16,color:C.tl,lineHeight:1.6,margin:"0 0 8px"}}>{guide.subtitle}</p>
-      <div style={{fontSize:13,color:C.accent,fontWeight:600}}>{guide.time} • Updated {guide.updated}</div>
-    </div>
-    {guide.sections.map((s,i)=><React.Fragment key={i}>
-      <div style={{marginBottom:36}}>
-        <h2 style={{fontSize:22,fontWeight:700,color:C.tx,margin:"0 0 16px",borderBottom:`2px solid ${C.accent}`,paddingBottom:8}}>{s.h}</h2>
-        {s.b.split('\n\n').map((p,j)=>{
-          if(p.startsWith('|'))return <table key={j} style={{width:"100%",borderCollapse:"collapse",margin:"16px 0",fontSize:14}}><tbody>{p.split('\n').filter(r=>!r.includes('---')).map((r,ri)=><tr key={ri}>{r.split('|').filter(c=>c.trim()).map((c,ci)=><td key={ci} style={{border:`1px solid ${C.bd}`,padding:8,background:ri===0?C.bl:"#fff",fontWeight:ri===0?600:400}}>{c.trim()}</td>)}</tr>)}</tbody></table>;
-          if(p.startsWith('**'))return <div key={j} style={{background:C.bl,border:`1px solid ${C.bd}`,borderRadius:6,padding:16,margin:"16px 0"}}>{p.split('\n').map((line,li)=>{const m=line.match(/^\*\*(.+?)\*\*\s*(.*)$/);return m?<p key={li} style={{margin:"0 0 8px",fontSize:14}}><strong style={{color:C.accent}}>{m[1]}</strong> {m[2]}</p>:<p key={li} style={{margin:"0 0 8px",fontSize:14}}>{line}</p>;})}</div>;
-          return <p key={j} style={{fontSize:15,lineHeight:1.7,color:C.tx,margin:"0 0 16px"}}>{p}</p>;
-        })}
-      </div>
-      {i===midPoint&&<CalendlyCTA/>}
-    </React.Fragment>)}
-    <div style={{marginTop:60,display:"flex",gap:12,justifyContent:"center",flexWrap:"wrap"}}>
-      <CalendlyBtn>Book Free Consultation</CalendlyBtn>
-      <GoldBtn onClick={()=>go("estimator")}>Calculate Your Fee</GoldBtn>
-    </div>
-  </div>;
-}
-function QuizPage({go}){
-  const [step,setStep]=useState(0);
-  const [answers,setAnswers]=useState({});
-
-  const questions=[
-    {q:"What is the seniority level of this role?",opts:[{t:"Director level or above",pts:3},{t:"Senior Manager",pts:2},{t:"Manager or below",pts:0}]},
-    {q:"How critical is confidentiality?",opts:[{t:"Essential - cannot advertise publicly",pts:3},{t:"Important but not critical",pts:2},{t:"Not a major concern",pts:0}]},
-    {q:"Have you previously advertised this role?",opts:[{t:"Yes, and it didn't work",pts:3},{t:"No, this is the first attempt",pts:1},{t:"Yes, and we got good candidates",pts:0}]},
-    {q:"What is the cost of getting this hire wrong?",opts:[{t:"Very high - strategic impact",pts:3},{t:"Moderate - operational impact",pts:2},{t:"Low - easily reversible",pts:0}]},
-    {q:"Are the best candidates likely to be actively looking?",opts:[{t:"No - they're passive/employed",pts:3},{t:"Mixed - some active, some passive",pts:2},{t:"Yes - active job seekers",pts:0}]}
-  ];
-
-  const ans=(pts)=>{setAnswers({...answers,[step]:pts});setStep(step+1);};
-  const total=Object.values(answers).reduce((a,b)=>a+b,0);
-  const complete=step>=questions.length;
-
-  const getRecommendation=()=>{
-    if(total>=10)return {rec:"Strong Yes",msg:"Your situation is exactly what retained executive search is designed for. The combination of seniority, confidentiality requirements, and the passive nature of the best candidates makes a headhunter the clear choice.",color:C.ok};
-    if(total>=6)return {rec:"Probably Yes",msg:"Several factors suggest a headhunter would deliver better results than advertising alone. Consider a retained search or at minimum a hybrid model.",color:C.accent};
-    if(total>=3)return {rec:"Consider It",msg:"A headhunter could add value, but advertising-first might be a reasonable starting point. If advertising doesn't work within 4–6 weeks, engage a headhunter.",color:C.gold};
-    return {rec:"Probably Not",msg:"Your role characteristics suggest conventional recruitment channels may be sufficient. Save retained search fees for more senior or strategic appointments.",color:C.tl};
-  };
-
-  const result=complete?getRecommendation():null;
-
-  return <div style={{padding:"60px 20px 80px",maxWidth:700,margin:"0 auto"}}>
-    <BackBtn label="Home" onClick={()=>go("home")}/>
-    <div style={{textAlign:"center",marginBottom:40}}>
-      <div style={{fontSize:48,marginBottom:12}}>🎯</div>
-      <h1 style={{fontSize:"clamp(28px,4vw,38px)",fontWeight:750,color:C.tx,margin:"0 0 12px"}}>Do I Need a Headhunter?</h1>
-      <p style={{fontSize:15,color:C.tl}}>Answer 5 questions to find out if retained executive search is right for your role.</p>
-    </div>
-
-    {!complete&&<div style={{background:C.card,border:`1px solid ${C.bd}`,borderRadius:8,padding:32}}>
-      <div style={{fontSize:13,color:C.tl,fontWeight:600,marginBottom:8}}>Question {step+1} of {questions.length}</div>
-      <div style={{height:6,background:C.bl,borderRadius:3,marginBottom:24}}>
-        <div style={{height:6,background:C.accent,borderRadius:3,width:`${((step+1)/questions.length)*100}%`,transition:"width 0.3s"}}/>
-      </div>
-      <h2 style={{fontSize:20,fontWeight:700,color:C.tx,margin:"0 0 24px"}}>{questions[step].q}</h2>
-      <div style={{display:"grid",gap:12}}>
-        {questions[step].opts.map((o,i)=><div key={i} onClick={()=>ans(o.pts)} style={{padding:16,border:`2px solid ${C.bd}`,borderRadius:8,cursor:"pointer",transition:"all 0.2s",background:C.bg}} onMouseEnter={e=>{e.currentTarget.style.borderColor=C.accent;e.currentTarget.style.background=C.card;}} onMouseLeave={e=>{e.currentTarget.style.borderColor=C.bd;e.currentTarget.style.background=C.bg;}}>
-          <div style={{fontSize:15,fontWeight:600,color:C.tx}}>{o.t}</div>
-        </div>)}
-      </div>
-    </div>}
-
-    {complete&&result&&<div style={{background:C.card,border:`1px solid ${C.bd}`,borderRadius:8,padding:32}}>
-      <div style={{textAlign:"center",marginBottom:32}}>
-        <div style={{fontSize:48,marginBottom:16}}>✓</div>
-        <div style={{fontSize:14,color:C.tl,marginBottom:8}}>Your Score: {total} / 15</div>
-        <h2 style={{fontSize:32,fontWeight:800,color:result.color,margin:"0 0 16px"}}>{result.rec}</h2>
-        <p style={{fontSize:16,lineHeight:1.6,color:C.tx,margin:0}}>{result.msg}</p>
-      </div>
-      <div style={{display:"flex",gap:12,justifyContent:"center",flexWrap:"wrap"}}>
-        <Btn onClick={()=>{setStep(0);setAnswers({});}}>Retake Quiz</Btn>
-        <GoldBtn onClick={()=>go("contact")}>Brief a Headhunter →</GoldBtn>
-      </div>
-    </div>}
-  </div>;
-}
-
-function EstimatorPage({go}){
-  const [role,setRole]=useState("");
-  const [salary,setSalary]=useState("");
-  const [urgency,setUrgency]=useState(1);
-  const [scope,setScope]=useState(0);
-  const [showResult,setShowResult]=useState(false);
-
-  const calc=()=>{
-    if(!role||!salary)return null;
-    const s=parseInt(salary.replace(/[^0-9]/g,''));
-    if(isNaN(s)||s<1)return null;
-    const tier=ROLES_ESTIMATOR.find(r=>r.label===role)?.tier||2;
-    const base=tier===3?0.30:tier===2?0.28:0.25;
-    const urg=URGENCY[urgency];
-    const scp=SCOPE[scope];
-    const fee=s*base*urg.mult*scp.mult;
-    const badHireMin=s*3;
-    const badHireMax=s*5;
-    const vacancyCost=s*0.15*3;
-    const productivityLoss=s*0.6;
-    const teamImpact=s*0.25;
-    const totalRisk=(badHireMin+badHireMax)/2+vacancyCost+productivityLoss+teamImpact;
-    const roi=totalRisk/fee;
-    return {fee:Math.round(fee),badHireMin,badHireMax,vacancyCost:Math.round(vacancyCost),productivityLoss:Math.round(productivityLoss),teamImpact:Math.round(teamImpact),totalRisk:Math.round(totalRisk),roi:Math.round(roi*10)/10,weeks:urg.weeks,pct:Math.round(base*urg.mult*scp.mult*100)};
-  };
-
-  const res=calc();
-
-  return <div style={{padding:"60px 20px 80px",maxWidth:900,margin:"0 auto"}}>
-    <BackBtn label="Home" onClick={()=>go("home")}/>
-    <div style={{textAlign:"center",marginBottom:40}}>
-      <div style={{fontSize:48,marginBottom:12}}>💷</div>
-      <h1 style={{fontSize:"clamp(28px,4vw,38px)",fontWeight:750,color:C.tx,margin:"0 0 12px"}}>Enhanced ROI Fee Calculator</h1>
-      <p style={{fontSize:15,color:C.tl}}>Calculate your search fee with full ROI analysis and bad hire cost breakdown</p>
-    </div>
-
-    <div style={{background:C.card,border:`1px solid ${C.bd}`,borderRadius:8,padding:32}}>
-      <div style={{marginBottom:24}}>
-        <label style={{display:"block",fontSize:14,fontWeight:600,color:C.tx,marginBottom:8}}>Role Level</label>
-        <select value={role} onChange={e=>setRole(e.target.value)} style={{width:"100%",padding:"12px 16px",fontSize:15,border:`1px solid ${C.bd}`,borderRadius:6,background:C.bg,color:C.tx}}>
-          <option value="">Select role...</option>
-          {ROLES_ESTIMATOR.map(r=><option key={r.label} value={r.label}>{r.label}</option>)}
-        </select>
-      </div>
-
-      <div style={{marginBottom:24}}>
-        <label style={{display:"block",fontSize:14,fontWeight:600,color:C.tx,marginBottom:8}}>Annual Salary (£)</label>
-        <input type="text" value={salary} onChange={e=>setSalary(e.target.value)} placeholder="e.g., 150000" style={{width:"100%",padding:"12px 16px",fontSize:15,border:`1px solid ${C.bd}`,borderRadius:6,background:C.bg,color:C.tx}}/>
-      </div>
-
-      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:16,marginBottom:32}}>
-        <div>
-          <label style={{display:"block",fontSize:14,fontWeight:600,color:C.tx,marginBottom:12}}>Urgency</label>
-          <select value={urgency} onChange={e=>setUrgency(parseInt(e.target.value))} style={{width:"100%",padding:"12px 16px",fontSize:14,border:`1px solid ${C.bd}`,borderRadius:6,background:C.bg,color:C.tx}}>
-            {URGENCY.map((u,i)=><option key={i} value={i}>{u.label}</option>)}
-          </select>
-        </div>
-        <div>
-          <label style={{display:"block",fontSize:14,fontWeight:600,color:C.tx,marginBottom:12}}>Search Scope</label>
-          <select value={scope} onChange={e=>setScope(parseInt(e.target.value))} style={{width:"100%",padding:"12px 16px",fontSize:14,border:`1px solid ${C.bd}`,borderRadius:6,background:C.bg,color:C.tx}}>
-            {SCOPE.map((s,i)=><option key={i} value={i}>{s.label}</option>)}
-          </select>
-        </div>
-      </div>
-
-      <Btn onClick={()=>setShowResult(true)} style={{width:"100%",padding:"14px",fontSize:16,fontWeight:700}}>Calculate Fee & ROI Analysis</Btn>
-
-      {showResult&&res&&<div style={{marginTop:32}}>
-        <div style={{padding:24,background:`linear-gradient(135deg,${C.dark},${C.accent})`,borderRadius:8,color:"#fff",marginBottom:20}}>
-          <h3 style={{fontSize:18,fontWeight:700,margin:"0 0 16px",textAlign:"center"}}>Estimated Search Fee</h3>
-          <div style={{fontSize:48,fontWeight:800,textAlign:"center",margin:"0 0 8px",color:C.gold}}>£{res.fee.toLocaleString()}</div>
-          <div style={{fontSize:14,textAlign:"center",opacity:0.9}}>({res.pct}% of salary • {res.weeks})</div>
-        </div>
-
-        <div style={{background:C.bl,border:`2px solid ${C.red}33`,borderRadius:8,padding:24,marginBottom:20}}>
-          <h3 style={{fontSize:18,fontWeight:700,color:C.red,margin:"0 0 16px"}}>Cost of a Bad Hire (Full Breakdown)</h3>
-
-          <div style={{marginBottom:16}}>
-            <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:8}}>
-              <span style={{fontSize:14,color:C.tx}}>Direct costs (severance, legal, rehire)</span>
-              <span style={{fontSize:16,fontWeight:700,color:C.red}}>£{res.badHireMin.toLocaleString()}–£{res.badHireMax.toLocaleString()}</span>
-            </div>
-            <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:8}}>
-              <span style={{fontSize:14,color:C.tx}}>Vacancy cost (3 months at 15%)</span>
-              <span style={{fontSize:16,fontWeight:700,color:C.red}}>£{res.vacancyCost.toLocaleString()}</span>
-            </div>
-            <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:8}}>
-              <span style={{fontSize:14,color:C.tx}}>Productivity loss (underperformance)</span>
-              <span style={{fontSize:16,fontWeight:700,color:C.red}}>£{res.productivityLoss.toLocaleString()}</span>
-            </div>
-            <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",paddingBottom:12,borderBottom:`2px solid ${C.bd}`}}>
-              <span style={{fontSize:14,color:C.tx}}>Team impact & turnover</span>
-              <span style={{fontSize:16,fontWeight:700,color:C.red}}>£{res.teamImpact.toLocaleString()}</span>
-            </div>
-            <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",paddingTop:12}}>
-              <span style={{fontSize:16,fontWeight:700,color:C.dark}}>Total Risk</span>
-              <span style={{fontSize:22,fontWeight:800,color:C.red}}>£{res.totalRisk.toLocaleString()}</span>
-            </div>
-          </div>
-        </div>
-
-        <div style={{background:`linear-gradient(135deg,${C.ok}22,${C.ok}11)`,border:`2px solid ${C.ok}`,borderRadius:8,padding:24,textAlign:"center"}}>
-          <h3 style={{fontSize:18,fontWeight:700,color:C.ok,margin:"0 0 12px"}}>Return on Investment</h3>
-          <div style={{fontSize:40,fontWeight:800,color:C.ok,marginBottom:8}}>{res.roi}× ROI</div>
-          <p style={{fontSize:14,color:C.tx,margin:0,lineHeight:1.6}}>
-            For every £1 spent on retained search, you get £{res.roi} in downside risk protection. This doesn't include the upside value of an exceptional hire.
-          </p>
-        </div>
-      </div>}
-    </div>
-
-    <CalendlyCTA style={{marginTop:40}}/>
-  </div>;
-}
-function StatsPage({go}){
-  return <div style={{padding:"60px 20px 80px",maxWidth:1000,margin:"0 auto"}}>
-    <BackBtn label="Home" onClick={()=>go("home")}/>
-    <SectionTitle title="Executive Search Statistics"/>
-    <p style={{fontSize:15,color:C.tl,maxWidth:700,margin:"0 auto 40px",textAlign:"center"}}>
-      Authoritative UK executive search data points — market benchmarks, timelines, and industry standards.
-    </p>
-    <div style={{display:"grid",gap:20}}>
-      {STATS.map((st,i)=><div key={i} style={{background:C.card,border:`1px solid ${C.bd}`,borderRadius:8,padding:24,display:"grid",gridTemplateColumns:"auto 1fr",gap:20,alignItems:"center"}}>
-        <div style={{fontSize:"clamp(32px,4vw,48px)",fontWeight:800,color:C.accent,textAlign:"center",minWidth:140}}>{st.s}</div>
-        <div>
-          <p style={{fontSize:16,fontWeight:600,color:C.tx,margin:"0 0 6px",lineHeight:1.4}}>{st.l}</p>
-          <p style={{fontSize:12,color:C.tl,margin:0,fontStyle:"italic"}}>Source: {st.src}</p>
-        </div>
-      </div>)}
-    </div>
-  </div>;
-}
-function GlossaryPage({go}){
-  return <div style={{padding:"60px 20px 80px",maxWidth:900,margin:"0 auto"}}>
-    <BackBtn label="Home" onClick={()=>go("home")}/>
-    <SectionTitle title="Executive Search Glossary"/>
-    <p style={{fontSize:15,color:C.tl,maxWidth:700,margin:"0 auto 40px",textAlign:"center"}}>
-      Plain-English definitions of key executive search and headhunting terminology.
-    </p>
-    <div style={{display:"grid",gap:16}}>
-      {GLOSSARY.map((g,i)=><div key={i} style={{background:C.card,border:`1px solid ${C.bd}`,borderRadius:8,padding:20}}>
-        <h3 style={{fontSize:17,fontWeight:700,color:C.accent,margin:"0 0 8px"}}>{g.t}</h3>
-        <p style={{fontSize:14,lineHeight:1.6,color:C.tx,margin:0}}>{g.d}</p>
-      </div>)}
-    </div>
-  </div>;
-}
-function SectorsPage({go}){
-  return <div style={{padding:"60px 20px 80px",maxWidth:1100,margin:"0 auto"}}>
-    <BackBtn label="Home" onClick={()=>go("home")}/>
-    <SectionTitle title="Sectors We Serve"/>
-    <p style={{fontSize:15,color:C.tl,maxWidth:700,margin:"0 auto 40px",textAlign:"center"}}>
-      Deep sector expertise across 12 major industries.
-    </p>
-    <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(320px,1fr))",gap:20}}>
-      {SECTORS.map(s=><div key={s.id} onClick={()=>go(`sector:${s.id}`)} style={{background:C.card,border:`1px solid ${C.bd}`,borderRadius:8,padding:24,cursor:"pointer",transition:"all 0.2s",boxShadow:"0 1px 3px rgba(0,0,0,0.05)"}} onMouseEnter={e=>{e.currentTarget.style.boxShadow="0 4px 12px rgba(0,0,0,0.1)";e.currentTarget.style.borderColor=C.accent;}} onMouseLeave={e=>{e.currentTarget.style.boxShadow="0 1px 3px rgba(0,0,0,0.05)";e.currentTarget.style.borderColor=C.bd;}}>
-        <div style={{fontSize:36,marginBottom:12}}>{s.icon}</div>
-        <h3 style={{fontSize:18,fontWeight:700,color:C.tx,margin:"0 0 8px"}}>{s.name}</h3>
-        <p style={{fontSize:13,color:C.tl,lineHeight:1.5,margin:0}}>{s.desc}</p>
-      </div>)}
-    </div>
-  </div>;
-}
-function SectorDetailPage({sector,go}){
-  return <div style={{padding:"60px 20px 80px",maxWidth:900,margin:"0 auto"}}>
-    <BackBtn label="All Sectors" onClick={()=>go("sectors")}/>
-    <div style={{textAlign:"center",marginBottom:40}}>
-      <div style={{fontSize:56,marginBottom:12}}>{sector.icon}</div>
-      <h1 style={{fontSize:"clamp(28px,4vw,38px)",fontWeight:750,color:C.tx,margin:"0 0 12px"}}>{sector.name}</h1>
-      <p style={{fontSize:16,color:C.tl,fontWeight:500}}>{sector.desc}</p>
-    </div>
-
-    <div style={{background:C.bl,border:`1px solid ${C.bd}`,borderRadius:8,padding:28,marginBottom:32}}>
-      <h2 style={{fontSize:18,fontWeight:700,color:C.tx,margin:"0 0 16px"}}>Overview</h2>
-      <p style={{fontSize:15,lineHeight:1.7,color:C.tx,margin:0}}>{sector.intro}</p>
-    </div>
-
-    <div style={{marginBottom:32}}>
-      <h2 style={{fontSize:20,fontWeight:700,color:C.tx,margin:"0 0 16px",borderBottom:`2px solid ${C.accent}`,paddingBottom:8}}>Typical Roles</h2>
-      <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(220px,1fr))",gap:10}}>
-        {sector.roles.map((r,i)=><div key={i} style={{background:C.card,border:`1px solid ${C.bd}`,borderRadius:6,padding:"10px 14px",fontSize:14,fontWeight:500,color:C.tx}}>{r}</div>)}
-      </div>
-    </div>
-
-    <div style={{marginBottom:32}}>
-      <h2 style={{fontSize:20,fontWeight:700,color:C.tx,margin:"0 0 16px",borderBottom:`2px solid ${C.accent}`,paddingBottom:8}}>Key Challenges</h2>
-      <p style={{fontSize:15,lineHeight:1.7,color:C.tx}}>{sector.challenges}</p>
-    </div>
-
-    <div style={{marginBottom:32}}>
-      <h2 style={{fontSize:20,fontWeight:700,color:C.tx,margin:"0 0 16px",borderBottom:`2px solid ${C.accent}`,paddingBottom:8}}>Why Use Executive Search</h2>
-      <p style={{fontSize:15,lineHeight:1.7,color:C.tx}}>{sector.whySearch}</p>
-    </div>
-
-    <div style={{background:`linear-gradient(135deg,${C.dark}dd,${C.accent}dd)`,borderRadius:8,padding:24,color:"#fff"}}>
-      <h3 style={{fontSize:17,fontWeight:700,margin:"0 0 8px"}}>Typical Fees</h3>
-      <p style={{fontSize:15,margin:0,opacity:0.95}}>{sector.fees}</p>
-    </div>
-
-    <div style={{marginTop:60,textAlign:"center"}}>
-      <GoldBtn onClick={()=>go("contact")}>Discuss Your {sector.name} Search →</GoldBtn>
-    </div>
-  </div>;
-}
-function ComparisonsPage({go}){
-  return <div style={{padding:"60px 20px 80px",maxWidth:1100,margin:"0 auto"}}>
-    <BackBtn label="Home" onClick={()=>go("home")}/>
-    <SectionTitle title="Comparisons"/>
-    <p style={{fontSize:15,color:C.tl,maxWidth:700,margin:"0 auto 40px",textAlign:"center"}}>
-      Side-by-side comparisons to help you choose the right approach for senior hiring.
-    </p>
-    <div style={{display:"grid",gap:20}}>
-      {COMPARISONS.map(c=><div key={c.id} onClick={()=>go(`comparison:${c.id}`)} style={{background:C.card,border:`1px solid ${C.bd}`,borderRadius:8,padding:28,cursor:"pointer",transition:"all 0.2s",boxShadow:"0 1px 3px rgba(0,0,0,0.05)",display:"grid",gridTemplateColumns:"auto 1fr",gap:20,alignItems:"start"}} onMouseEnter={e=>{e.currentTarget.style.boxShadow="0 4px 12px rgba(0,0,0,0.1)";e.currentTarget.style.borderColor=C.accent;}} onMouseLeave={e=>{e.currentTarget.style.boxShadow="0 1px 3px rgba(0,0,0,0.05)";e.currentTarget.style.borderColor=C.bd;}}>
-        <div style={{fontSize:40}}>{c.icon}</div>
-        <div>
-          <h3 style={{fontSize:20,fontWeight:700,color:C.tx,margin:"0 0 8px"}}>{c.title}</h3>
-          <p style={{fontSize:14,color:C.tl,lineHeight:1.5,margin:0}}>{c.subtitle}</p>
-        </div>
-      </div>)}
-    </div>
-  </div>;
-}
-
-function ComparisonPage({comp,go}){
-  return <div style={{padding:"60px 20px 80px",maxWidth:900,margin:"0 auto"}}>
-    <BackBtn label="All Comparisons" onClick={()=>go("comparisons")}/>
-    <div style={{textAlign:"center",marginBottom:40}}>
-      <div style={{fontSize:56,marginBottom:12}}>{comp.icon}</div>
-      <h1 style={{fontSize:"clamp(26px,4vw,38px)",fontWeight:750,color:C.tx,margin:"0 0 12px"}}>{comp.title}</h1>
-      <p style={{fontSize:16,color:C.tl,lineHeight:1.6,fontWeight:500}}>{comp.subtitle}</p>
-    </div>
-
-    <div style={{background:C.bl,border:`1px solid ${C.bd}`,borderRadius:8,padding:24,marginBottom:32}}>
-      {comp.intro.split('\n\n').map((p,i)=><p key={i} style={{fontSize:15,lineHeight:1.7,color:C.tx,margin:i===0?"0 0 16px":"16px 0"}}>{p}</p>)}
-    </div>
-
-    {comp.table&&<div style={{marginBottom:32,overflowX:"auto"}}>
-      <table style={{width:"100%",borderCollapse:"collapse",fontSize:14}}>
-        <tbody>
-          {comp.table.map((row,i)=><tr key={i} style={{background:i===0?C.accent:i%2===1?C.bg:C.card}}>
-            {row.map((cell,j)=><td key={j} style={{padding:12,border:`1px solid ${C.bd}`,color:i===0?"#fff":C.tx,fontWeight:i===0||j===0?600:400}}>{cell}</td>)}
-          </tr>)}
-        </tbody>
-      </table>
-    </div>}
-
-    <div style={{background:C.bl,border:`1px solid ${C.bd}`,borderRadius:8,padding:24,marginBottom:32}}>
-      <h3 style={{fontSize:18,fontWeight:700,color:C.tx,margin:"0 0 12px"}}>Verdict</h3>
-      <p style={{fontSize:15,lineHeight:1.7,color:C.tx,margin:0}}>{comp.verdict}</p>
-    </div>
-
-    <CalendlyCTA/>
-
-    <div style={{marginTop:40,display:"flex",gap:12,justifyContent:"center",flexWrap:"wrap"}}>
-      <GoldBtn onClick={()=>go("contact")}>{comp.cta} →</GoldBtn>
-      <Btn onClick={()=>go("estimator")}>Calculate Fee</Btn>
-    </div>
-  </div>;
-}
-function IntentPage({page,go}){
-  return <div style={{padding:"60px 20px 80px",maxWidth:800,margin:"0 auto"}}>
-    <BackBtn label="Home" onClick={()=>go("home")}/>
-    <div style={{textAlign:"center",marginBottom:40}}>
-      <div style={{fontSize:56,marginBottom:12}}>{page.icon}</div>
-      <h1 style={{fontSize:"clamp(28px,4vw,38px)",fontWeight:750,color:C.tx,margin:"0 0 20px"}}>{page.title}</h1>
-    </div>
-
-    <div style={{background:C.bl,border:`1px solid ${C.bd}`,borderRadius:8,padding:28,marginBottom:32}}>
-      {page.intro.split('\n\n').map((p,i)=><p key={i} style={{fontSize:15,lineHeight:1.7,color:C.tx,margin:i===0?"0 0 16px":"16px 0"}}>{p}</p>)}
-    </div>
-
-    <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(200px,1fr))",gap:16,marginBottom:32}}>
-      <div style={{background:C.card,border:`1px solid ${C.bd}`,borderRadius:8,padding:20}}>
-        <div style={{fontSize:12,color:C.tl,fontWeight:600,marginBottom:4}}>Salary Range</div>
-        <div style={{fontSize:16,fontWeight:700,color:C.tx}}>{page.salaryRange}</div>
-      </div>
-      <div style={{background:C.card,border:`1px solid ${C.bd}`,borderRadius:8,padding:20}}>
-        <div style={{fontSize:12,color:C.tl,fontWeight:600,marginBottom:4}}>Search Fee</div>
-        <div style={{fontSize:16,fontWeight:700,color:C.tx}}>{page.searchFee}</div>
-      </div>
-      <div style={{background:C.card,border:`1px solid ${C.bd}`,borderRadius:8,padding:20}}>
-        <div style={{fontSize:12,color:C.tl,fontWeight:600,marginBottom:4}}>Timeline</div>
-        <div style={{fontSize:16,fontWeight:700,color:C.tx}}>{page.timeline}</div>
-      </div>
-    </div>
-
-    {page.responsibilities && <>
-      <div style={{marginBottom:32}}>
-        <h2 style={{fontSize:20,fontWeight:700,color:C.tx,margin:"0 0 16px",borderBottom:`2px solid ${C.accent}`,paddingBottom:8}}>Typical Responsibilities</h2>
-        <ul style={{fontSize:15,lineHeight:1.8,color:C.tx,margin:0,paddingLeft:20}}>
-          {page.responsibilities.map((r,i)=><li key={i} style={{marginBottom:10}}>{r}</li>)}
-        </ul>
-      </div>
-    </>}
-
-    {page.keyQualities && <>
-      <div style={{marginBottom:32}}>
-        <h2 style={{fontSize:20,fontWeight:700,color:C.tx,margin:"0 0 16px",borderBottom:`2px solid ${C.accent}`,paddingBottom:8}}>Key Qualities to Look For</h2>
-        <div style={{display:"grid",gap:12}}>
-          {page.keyQualities.map((q,i)=>{
-            const [label,...rest]=q.split(':');
-            return <div key={i} style={{background:C.card,border:`1px solid ${C.bd}`,borderRadius:8,padding:16}}>
-              <div style={{fontWeight:700,color:C.accent,marginBottom:4}}>{label}</div>
-              <div style={{fontSize:14,lineHeight:1.6,color:C.tx}}>{rest.join(':').trim()}</div>
-            </div>;
-          })}
-        </div>
-      </div>
-    </>}
-
-    <div style={{marginBottom:32}}>
-      <h2 style={{fontSize:20,fontWeight:700,color:C.tx,margin:"0 0 16px",borderBottom:`2px solid ${C.accent}`,paddingBottom:8}}>Key Considerations</h2>
-      <ul style={{fontSize:15,lineHeight:1.8,color:C.tx,margin:0,paddingLeft:20}}>
-        {page.considerations.map((c,i)=><li key={i} style={{marginBottom:10}}>{c}</li>)}
-      </ul>
-    </div>
-
-    {page.interviewQuestions && <>
-      <div style={{marginBottom:32}}>
-        <h2 style={{fontSize:20,fontWeight:700,color:C.tx,margin:"0 0 16px",borderBottom:`2px solid ${C.accent}`,paddingBottom:8}}>Interview Questions to Ask</h2>
-        <div style={{display:"grid",gap:12}}>
-          {page.interviewQuestions.map((q,i)=><div key={i} style={{background:C.bl,border:`1px solid ${C.bd}`,borderRadius:8,padding:16}}>
-            <div style={{fontSize:14,lineHeight:1.7,color:C.tx,fontWeight:500}}>{q}</div>
-          </div>)}
-        </div>
-      </div>
-    </>}
-
-    {page.hiringGuide && <>
-      <div style={{marginBottom:32}}>
-        <h2 style={{fontSize:20,fontWeight:700,color:C.tx,margin:"0 0 16px",borderBottom:`2px solid ${C.accent}`,paddingBottom:8}}>Step-by-Step Hiring Guide</h2>
-        <div style={{display:"grid",gap:16}}>
-          {page.hiringGuide.map((step,i)=><div key={i} style={{background:C.card,border:`1px solid ${C.bd}`,borderLeft:`4px solid ${C.accent}`,borderRadius:8,padding:20}}>
-            <div style={{display:"flex",alignItems:"start",gap:12}}>
-              <div style={{background:C.accent,color:"#fff",borderRadius:"50%",width:28,height:28,display:"flex",alignItems:"center",justifyContent:"center",fontSize:13,fontWeight:700,flexShrink:0}}>{i+1}</div>
-              <div style={{flex:1}}>
-                <div style={{fontWeight:700,color:C.tx,marginBottom:6,fontSize:15}}>{step.step}</div>
-                <div style={{fontSize:14,lineHeight:1.7,color:C.tl}}>{step.detail}</div>
-              </div>
-            </div>
-          </div>)}
-        </div>
-      </div>
-    </>}
-
-    <div style={{background:C.bl,border:`1px solid ${C.bd}`,borderRadius:8,padding:24,marginBottom:32}}>
-      <h3 style={{fontSize:18,fontWeight:700,color:C.tx,margin:"0 0 12px"}}>Why Use Executive Search</h3>
-      {page.whySearch.split('\n\n').map((p,i)=><p key={i} style={{fontSize:15,lineHeight:1.7,color:C.tx,margin:i===0?"0":"16px 0 0"}}>{p}</p>)}
-    </div>
-
-    <CalendlyCTA/>
-
-    <div style={{marginTop:40,display:"flex",gap:12,justifyContent:"center",flexWrap:"wrap"}}>
-      <GoldBtn onClick={()=>go("contact")}>Brief a {page.role} Search →</GoldBtn>
-      <Btn onClick={()=>go("estimator")}>Calculate Fee</Btn>
-    </div>
-  </div>;
-}
-
-function IndustryPage({page,go}){
-  return <div style={{padding:"60px 20px 80px",maxWidth:900,margin:"0 auto"}}>
-    <BackBtn label="Industries" onClick={()=>go("industries")}/>
-    <div style={{textAlign:"center",marginBottom:40}}>
-      <div style={{fontSize:56,marginBottom:12}}>{page.icon}</div>
-      <h1 style={{fontSize:"clamp(28px,4vw,38px)",fontWeight:750,color:C.tx,margin:"0 0 12px"}}>{page.title}</h1>
-      <p style={{fontSize:16,color:C.tl,lineHeight:1.6,fontWeight:500}}>{page.subtitle}</p>
-    </div>
-
-    <div style={{background:C.bl,border:`1px solid ${C.bd}`,borderRadius:8,padding:28,marginBottom:32}}>
-      <p style={{fontSize:15,lineHeight:1.7,color:C.tx,margin:0}}>{page.intro}</p>
-    </div>
-
-    <div style={{marginBottom:32}}>
-      <h2 style={{fontSize:20,fontWeight:700,color:C.tx,margin:"0 0 16px",borderBottom:`2px solid ${C.accent}`,paddingBottom:8}}>Key Challenges</h2>
-      <ul style={{fontSize:15,lineHeight:1.8,color:C.tx,margin:0,paddingLeft:20}}>
-        {page.challenges.map((c,i)=><li key={i} style={{marginBottom:10}}>{c}</li>)}
-      </ul>
-    </div>
-
-    <CalendlyCTA/>
-
-    <div style={{marginBottom:32}}>
-      <h2 style={{fontSize:20,fontWeight:700,color:C.tx,margin:"0 0 16px",borderBottom:`2px solid ${C.accent}`,paddingBottom:8}}>Typical Roles We Fill</h2>
-      <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(240px,1fr))",gap:10}}>
-        {page.roles.map((r,i)=><div key={i} style={{background:C.card,border:`1px solid ${C.bd}`,borderRadius:6,padding:"12px 16px",fontSize:14,fontWeight:500,color:C.tx}}>{r}</div>)}
-      </div>
-    </div>
-
-    <div style={{background:C.bl,border:`1px solid ${C.bd}`,borderRadius:8,padding:24,marginBottom:32}}>
-      <h3 style={{fontSize:18,fontWeight:700,color:C.tx,margin:"0 0 12px"}}>Why Use Specialist Executive Search</h3>
-      <p style={{fontSize:15,lineHeight:1.7,color:C.tx,margin:0}}>{page.whyUse}</p>
-    </div>
-
-    <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:16,marginBottom:40}}>
-      <div style={{background:C.card,border:`1px solid ${C.bd}`,borderRadius:8,padding:20}}>
-        <div style={{fontSize:12,color:C.tl,fontWeight:600,marginBottom:4}}>Typical Search Fee</div>
-        <div style={{fontSize:16,fontWeight:700,color:C.tx}}>{page.searchFee}</div>
-      </div>
-      <div style={{background:C.card,border:`1px solid ${C.bd}`,borderRadius:8,padding:20}}>
-        <div style={{fontSize:12,color:C.tl,fontWeight:600,marginBottom:4}}>Timeline</div>
-        <div style={{fontSize:16,fontWeight:700,color:C.tx}}>{page.timeline}</div>
-      </div>
-    </div>
-
-    <div style={{display:"flex",gap:12,justifyContent:"center",flexWrap:"wrap"}}>
-      <CalendlyBtn>Book Free Consultation</CalendlyBtn>
-      <GoldBtn onClick={()=>go("estimator")}>Calculate Your Fee</GoldBtn>
-    </div>
-  </div>;
-}
-
-function IndustriesPage({go}){
-  return <div style={{padding:"60px 20px 80px",maxWidth:1100,margin:"0 auto"}}>
-    <BackBtn label="Home" onClick={()=>go("home")}/>
-    <SectionTitle title="Industry Expertise" sub="Specialist executive search for high-growth sectors"/>
-    <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(320px,1fr))",gap:20}}>
-      {INDUSTRY_PAGES.map(p=><div key={p.id} onClick={()=>go(`industry:${p.id}`)} style={{background:C.card,border:`1px solid ${C.bd}`,borderRadius:8,padding:24,cursor:"pointer",transition:"all 0.2s",boxShadow:"0 1px 3px rgba(0,0,0,0.05)"}} onMouseEnter={e=>{e.currentTarget.style.boxShadow="0 4px 12px rgba(0,0,0,0.1)";e.currentTarget.style.borderColor=C.accent;}} onMouseLeave={e=>{e.currentTarget.style.boxShadow="0 1px 3px rgba(0,0,0,0.05)";e.currentTarget.style.borderColor=C.bd;}}>
-        <div style={{fontSize:36,marginBottom:12}}>{p.icon}</div>
-        <h3 style={{fontSize:18,fontWeight:700,color:C.tx,margin:"0 0 8px"}}>{p.title}</h3>
-        <p style={{fontSize:13,color:C.tl,lineHeight:1.5,margin:0}}>{p.subtitle}</p>
-      </div>)}
-    </div>
-  </div>;
-}
-function BlogPage({go}){
-  return <div style={{padding:"60px 20px 80px",maxWidth:1100,margin:"0 auto"}}>
-    <BackBtn label="Home" onClick={()=>go("home")}/>
-    <SectionTitle title="Insights & Analysis"/>
-    <p style={{fontSize:15,color:C.tl,maxWidth:700,margin:"0 auto 40px",textAlign:"center"}}>
-      In-depth perspectives on executive search, leadership hiring, and talent strategy.
-    </p>
-    <div style={{display:"grid",gap:24}}>
-      {BLOG_ARTICLES.map(a=><div key={a.id} onClick={()=>go(`blog:${a.id}`)} style={{background:C.card,border:`1px solid ${C.bd}`,borderRadius:8,padding:28,cursor:"pointer",transition:"all 0.2s",boxShadow:"0 1px 3px rgba(0,0,0,0.05)"}} onMouseEnter={e=>{e.currentTarget.style.boxShadow="0 4px 12px rgba(0,0,0,0.1)";e.currentTarget.style.borderColor=C.accent;}} onMouseLeave={e=>{e.currentTarget.style.boxShadow="0 1px 3px rgba(0,0,0,0.05)";e.currentTarget.style.borderColor=C.bd;}}>
-        <div style={{display:"flex",gap:12,alignItems:"center",marginBottom:12,flexWrap:"wrap"}}>
-          <span style={{display:"inline-block",background:C.accent,color:"#fff",fontSize:10,fontWeight:700,padding:"3px 8px",borderRadius:4}}>{a.tag}</span>
-          <span style={{fontSize:12,color:C.tl}}>{a.date} • {a.readTime}</span>
-        </div>
-        <h2 style={{fontSize:22,fontWeight:700,color:C.tx,margin:"0 0 10px"}}>{a.title}</h2>
-        <p style={{fontSize:15,color:C.tl,lineHeight:1.6,margin:"0 0 12px"}}>{a.subtitle}</p>
-        <div style={{fontSize:13,color:C.accent,fontWeight:600}}>Read More →</div>
-      </div>)}
-    </div>
-  </div>;
-}
-function BlogArticlePage({article,go}){
-  const midPoint=Math.floor(article.sections.length/2);
-  return <div style={{padding:"60px 20px 80px",maxWidth:800,margin:"0 auto"}}>
-    <BackBtn label="All Insights" onClick={()=>go("blog")}/>
-    <div style={{marginBottom:32}}>
-      <div style={{display:"flex",gap:12,alignItems:"center",marginBottom:12,flexWrap:"wrap"}}>
-        <span style={{display:"inline-block",background:C.accent,color:"#fff",fontSize:11,fontWeight:700,padding:"4px 10px",borderRadius:4}}>{article.tag}</span>
-        <span style={{fontSize:13,color:C.tl}}>{article.date} • {article.readTime}</span>
-      </div>
-      <h1 style={{fontSize:"clamp(26px,4vw,38px)",fontWeight:750,color:C.tx,margin:"0 0 12px"}}>{article.title}</h1>
-      <p style={{fontSize:17,color:C.tl,lineHeight:1.6,fontWeight:500,margin:0}}>{article.subtitle}</p>
-    </div>
-    <div style={{background:C.bl,border:`1px solid ${C.bd}`,borderRadius:8,padding:24,marginBottom:32}}>
-      {article.intro.split('\n\n').map((p,i)=><p key={i} style={{fontSize:15,lineHeight:1.7,color:C.tx,margin:i===0?"0 0 16px":"16px 0"}}>{p}</p>)}
-    </div>
-    {article.sections.map((s,i)=><React.Fragment key={i}>
-      <div style={{marginBottom:36}}>
-        <h2 style={{fontSize:22,fontWeight:700,color:C.tx,margin:"0 0 16px",borderBottom:`2px solid ${C.accent}`,paddingBottom:8}}>{s.h}</h2>
-        {s.b.split('\n\n').map((p,j)=>{
-          if(p.startsWith('**Total:'))return <div key={j} style={{background:C.gold+"11",border:`2px solid ${C.gold}`,borderRadius:6,padding:20,margin:"16px 0",fontSize:17,fontWeight:700,color:C.tx,textAlign:"center"}}>{p.replace(/\*\*/g,'')}</div>;
-          if(p.startsWith('-'))return <ul key={j} style={{fontSize:15,lineHeight:1.8,color:C.tx,margin:"16px 0",paddingLeft:20}}>{p.split('\n').map((li,k)=><li key={k} style={{marginBottom:8}}>{li.replace(/^- /,'')}</li>)}</ul>;
-          if(p.includes('**'))return <p key={j} style={{fontSize:15,lineHeight:1.7,color:C.tx,margin:"16px 0"}}>{p.split('**').map((t,ti)=>ti%2===1?<strong key={ti} style={{fontWeight:700,color:C.accent}}>{t}</strong>:t)}</p>;
-          return <p key={j} style={{fontSize:15,lineHeight:1.7,color:C.tx,margin:"16px 0"}}>{p}</p>;
-        })}
-      </div>
-      {i===midPoint&&<CalendlyCTA/>}
-    </React.Fragment>)}
-    <div style={{marginTop:60,display:"flex",gap:12,justifyContent:"center",flexWrap:"wrap"}}>
-      <CalendlyBtn>Book Free Consultation</CalendlyBtn>
-      <GoldBtn onClick={()=>go("estimator")}>Calculate Fee & ROI</GoldBtn>
-    </div>
-  </div>;
-}
-function LocationsPage({go}){
-  return <div style={{padding:"60px 20px 80px",maxWidth:1200,margin:"0 auto"}}>
-    <BackBtn label="Home" onClick={()=>go("home")}/>
-    <SectionTitle title="UK Locations"/>
-    <p style={{fontSize:15,color:C.tl,maxWidth:700,margin:"0 auto 40px",textAlign:"center"}}>
-      Executive search expertise across major UK cities and regions.
-    </p>
-    <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(280px,1fr))",gap:16}}>
-      {LOCS.map(l=><div key={l.c} onClick={()=>go(`loc:${l.c.toLowerCase()}`)} style={{background:C.card,border:`1px solid ${C.bd}`,borderRadius:8,padding:20,cursor:"pointer",transition:"all 0.2s",boxShadow:"0 1px 3px rgba(0,0,0,0.05)"}} onMouseEnter={e=>{e.currentTarget.style.boxShadow="0 4px 12px rgba(0,0,0,0.1)";e.currentTarget.style.borderColor=C.accent;}} onMouseLeave={e=>{e.currentTarget.style.boxShadow="0 1px 3px rgba(0,0,0,0.05)";e.currentTarget.style.borderColor=C.bd;}}>
-        <h3 style={{fontSize:18,fontWeight:700,color:C.tx,margin:"0 0 8px"}}>{l.c}</h3>
-        <p style={{fontSize:13,color:C.tl,lineHeight:1.5,margin:"0 0 10px"}}>{l.p}</p>
-        <div style={{fontSize:11,color:C.accent,fontWeight:600}}>View Details →</div>
-      </div>)}
-    </div>
-  </div>;
-}
-function LocationPage({loc,go}){
-  return <div style={{padding:"60px 20px 80px",maxWidth:900,margin:"0 auto"}}>
-    <BackBtn label="All Locations" onClick={()=>go("locations")}/>
-    <h1 style={{fontSize:"clamp(30px,5vw,42px)",fontWeight:750,color:C.tx,margin:"0 0 12px",textAlign:"center"}}>Executive Search in {loc.c}</h1>
-    <p style={{fontSize:14,color:C.tl,textAlign:"center",margin:"0 0 32px"}}>Specialist headhunters for senior appointments in {loc.c}</p>
-
-    <div style={{background:C.bl,border:`1px solid ${C.bd}`,borderRadius:8,padding:28,marginBottom:32}}>
-      {renderBody(loc.p)}
-    </div>
-
-    <div style={{marginBottom:40}}>
-      <h2 style={{fontSize:22,fontWeight:700,color:C.tx,margin:"0 0 20px",borderBottom:`2px solid ${C.accent}`,paddingBottom:10}}>Typical Executive Roles in {loc.c}</h2>
-      <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(200px,1fr))",gap:12}}>
-        {loc.roles.map((r,i)=><div key={i} onClick={()=>go("guide:"+r.link)} style={{background:C.card,border:`1px solid ${C.bd}`,borderRadius:8,padding:"12px 16px",cursor:"pointer",transition:"all 0.2s",textAlign:"center"}} onMouseEnter={e=>{e.currentTarget.style.borderColor=C.accent;e.currentTarget.style.background=C.accent+"08";}} onMouseLeave={e=>{e.currentTarget.style.borderColor=C.bd;e.currentTarget.style.background=C.card;}}>
-          <span style={{fontSize:14,fontWeight:600,color:C.dark}}>{r.title}</span>
-          <div style={{fontSize:11,color:C.accent,marginTop:4,fontWeight:600}}>View Guide →</div>
-        </div>)}
-      </div>
-    </div>
-
-    <CalendlyCTA/>
-
-    <div style={{marginTop:40,textAlign:"center"}}>
-      <GoldBtn onClick={()=>go("contact")}>Request a Callback for Your {loc.c} Search →</GoldBtn>
-    </div>
-  </div>;
-}
-function ResourcesPage({go}){
-  const resources=[
-    {title:"Fee Estimator",desc:"Calculate the cost of a retained executive search",icon:"💷",action:()=>go("estimator")},
-    {title:"Do I Need a Headhunter?",desc:"5-question quiz to help you decide",icon:"🎯",action:()=>go("quiz")},
-    {title:"Comprehensive Guides",desc:"Expert guides on executive search",icon:"📚",action:()=>go("guides")},
-    {title:"UK Statistics",desc:"Authoritative data on executive search",icon:"📊",action:()=>go("stats")},
-    {title:"Glossary",desc:"Executive search terminology explained",icon:"📖",action:()=>go("glossary")},
-    {title:"Salary Benchmarks",desc:"UK senior executive salary ranges",icon:"💰",action:()=>go("salaries")}
-  ];
-
-  return <div style={{padding:"60px 20px 80px",maxWidth:1000,margin:"0 auto"}}>
-    <BackBtn label="Home" onClick={()=>go("home")}/>
-    <SectionTitle title="Resources"/>
-    <p style={{fontSize:15,color:C.tl,maxWidth:700,margin:"0 auto 40px",textAlign:"center"}}>
-      Tools, data, and guides to support your senior hiring decisions.
-    </p>
-    <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))",gap:20}}>
-      {resources.map((r,i)=><div key={i} onClick={r.action} style={{background:C.card,border:`1px solid ${C.bd}`,borderRadius:8,padding:24,cursor:"pointer",transition:"all 0.2s",boxShadow:"0 1px 3px rgba(0,0,0,0.05)"}} onMouseEnter={e=>{e.currentTarget.style.boxShadow="0 4px 12px rgba(0,0,0,0.1)";e.currentTarget.style.borderColor=C.accent;}} onMouseLeave={e=>{e.currentTarget.style.boxShadow="0 1px 3px rgba(0,0,0,0.05)";e.currentTarget.style.borderColor=C.bd;}}>
-        <div style={{fontSize:40,marginBottom:12}}>{r.icon}</div>
-        <h3 style={{fontSize:18,fontWeight:700,color:C.tx,margin:"0 0 8px"}}>{r.title}</h3>
-        <p style={{fontSize:13,color:C.tl,lineHeight:1.5,margin:0}}>{r.desc}</p>
-      </div>)}
-    </div>
-  </div>;
-}
-function ContactPage({go}){
-  const [form,setForm]=useState({name:"",email:"",company:"",role:"",salary:"",urgency:"",message:""});
-  const [submitted,setSubmitted]=useState(false);
-  const [submitting,setSubmitting]=useState(false);
-  const [error,setError]=useState("");
-
-  const update=(k,v)=>setForm({...form,[k]:v});
-
-  const submit=async(e)=>{
-    e.preventDefault();
-    setSubmitting(true);
-    setError("");
-
-    try {
-      const apiUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-enquiry`;
-      const response = await fetch(apiUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
-        },
-        body: JSON.stringify(form),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok || !data.success) {
-        throw new Error(data.error || "Failed to send enquiry");
-      }
-
-      setSubmitted(true);
-    } catch (err) {
-      console.error("Error submitting form:", err);
-      setError("Unable to send your enquiry. Please try again or email directly.");
-    } finally {
-      setSubmitting(false);
-    }
-  };
-
-  if(submitted){
-    return <div style={{padding:"60px 20px 80px",maxWidth:600,margin:"0 auto",textAlign:"center"}}>
-      <div style={{fontSize:64,marginBottom:20}}>✓</div>
-      <h1 style={{fontSize:32,fontWeight:750,color:C.ok,margin:"0 0 16px"}}>Thank You</h1>
-      <p style={{fontSize:16,color:C.tx,lineHeight:1.6,marginBottom:24}}>
-        Your brief has been received. A specialist consultant will be in touch within 2 hours during business hours.
-      </p>
-      <Btn onClick={()=>go("home")}>← Back to Home</Btn>
-    </div>;
-  }
-
-  return <div style={{padding:"60px 20px 80px",maxWidth:700,margin:"0 auto"}}>
-    <BackBtn label="Home" onClick={()=>go("home")}/>
-    <div style={{textAlign:"center",marginBottom:40}}>
-      <div style={{fontSize:48,marginBottom:12}}>📋</div>
-      <h1 style={{fontSize:"clamp(28px,4vw,38px)",fontWeight:750,color:C.tx,margin:"0 0 12px"}}>Brief a Headhunter</h1>
-      <p style={{fontSize:15,color:C.tl}}>Tell us about your search and a specialist consultant will be in touch.</p>
-      <p style={{fontSize:13,color:C.gold,fontWeight:600,margin:"8px 0 0"}}>⚡ Typical response within 2 hours</p>
-    </div>
-
-    <form onSubmit={submit} style={{background:C.card,border:`1px solid ${C.bd}`,borderRadius:8,padding:32}}>
-      <div style={{display:"grid",gap:20}}>
-        <div>
-          <label style={{display:"block",fontSize:14,fontWeight:600,color:C.tx,marginBottom:8}}>Your Name *</label>
-          <input required type="text" value={form.name} onChange={e=>update("name",e.target.value)} placeholder="John Smith" style={{width:"100%",padding:"12px 16px",fontSize:15,border:`1px solid ${C.bd}`,borderRadius:6,background:C.bg,color:C.tx}}/>
-        </div>
-
-        <div>
-          <label style={{display:"block",fontSize:14,fontWeight:600,color:C.tx,marginBottom:8}}>Email Address *</label>
-          <input required type="email" value={form.email} onChange={e=>update("email",e.target.value)} placeholder="john.smith@company.com" style={{width:"100%",padding:"12px 16px",fontSize:15,border:`1px solid ${C.bd}`,borderRadius:6,background:C.bg,color:C.tx}}/>
-        </div>
-
-        <div>
-          <label style={{display:"block",fontSize:14,fontWeight:600,color:C.tx,marginBottom:8}}>Company</label>
-          <input type="text" value={form.company} onChange={e=>update("company",e.target.value)} placeholder="Company name" style={{width:"100%",padding:"12px 16px",fontSize:15,border:`1px solid ${C.bd}`,borderRadius:6,background:C.bg,color:C.tx}}/>
-        </div>
-
-        <div>
-          <label style={{display:"block",fontSize:14,fontWeight:600,color:C.tx,marginBottom:8}}>Role You're Hiring For *</label>
-          <input required type="text" value={form.role} onChange={e=>update("role",e.target.value)} placeholder="e.g., CFO, Sales Director, CTO" style={{width:"100%",padding:"12px 16px",fontSize:15,border:`1px solid ${C.bd}`,borderRadius:6,background:C.bg,color:C.tx}}/>
-        </div>
-
-        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:16}}>
-          <div>
-            <label style={{display:"block",fontSize:14,fontWeight:600,color:C.tx,marginBottom:8}}>Salary Range</label>
-            <input type="text" value={form.salary} onChange={e=>update("salary",e.target.value)} placeholder="e.g., £120k-£150k" style={{width:"100%",padding:"12px 16px",fontSize:15,border:`1px solid ${C.bd}`,borderRadius:6,background:C.bg,color:C.tx}}/>
-          </div>
-          <div>
-            <label style={{display:"block",fontSize:14,fontWeight:600,color:C.tx,marginBottom:8}}>Timeline</label>
-            <select value={form.urgency} onChange={e=>update("urgency",e.target.value)} style={{width:"100%",padding:"12px 16px",fontSize:15,border:`1px solid ${C.bd}`,borderRadius:6,background:C.bg,color:C.tx}}>
-              <option value="">Select...</option>
-              <option value="critical">Critical (0-4 weeks)</option>
-              <option value="important">Important (1-3 months)</option>
-              <option value="planning">Planning (3-6 months)</option>
-              <option value="exploratory">Exploratory</option>
-            </select>
-          </div>
-        </div>
-
-        <div>
-          <label style={{display:"block",fontSize:14,fontWeight:600,color:C.tx,marginBottom:8}}>Brief Description</label>
-          <textarea value={form.message} onChange={e=>update("message",e.target.value)} placeholder="Tell us about the role, your organisation, and what you're looking for..." rows="5" style={{width:"100%",padding:"12px 16px",fontSize:15,border:`1px solid ${C.bd}`,borderRadius:6,background:C.bg,color:C.tx,fontFamily:"inherit",resize:"vertical"}}/>
-        </div>
-
-        <div style={{background:C.bl,border:`1px solid ${C.bd}`,borderRadius:6,padding:16,fontSize:13,color:C.tl,lineHeight:1.6}}>
-          <strong style={{color:C.tx}}>What happens next:</strong> A specialist consultant will review your brief and contact you within 2 hours during business hours to discuss your search.
-        </div>
-
-        {error && (
-          <div style={{background:"#fee",border:"1px solid #fcc",borderRadius:6,padding:16,fontSize:14,color:"#c33"}}>
-            {error}
-          </div>
-        )}
-
-        <button type="submit" disabled={submitting} style={{width:"100%",padding:"14px",fontSize:16,fontWeight:700,background:submitting?"#ccc":`linear-gradient(135deg,${C.gold},${C.gold}dd)`,color:"#fff",border:"none",borderRadius:6,cursor:submitting?"not-allowed":"pointer",transition:"all 0.2s",opacity:submitting?0.6:1}} onMouseEnter={e=>!submitting&&(e.currentTarget.style.transform="translateY(-2px)")} onMouseLeave={e=>e.currentTarget.style.transform="translateY(0)"}>
-          {submitting ? "Sending..." : "Submit Brief →"}
-        </button>
-      </div>
-    </form>
-  </div>;
-}
-function SalaryPage({go}){
-  return <div style={{padding:"60px 20px 80px",maxWidth:900,margin:"0 auto"}}>
-    <BackBtn label="Resources" onClick={()=>go("resources")}/>
-    <SectionTitle title="UK Executive Salary Benchmarks"/>
-    <p style={{fontSize:15,color:C.tl,maxWidth:700,margin:"0 auto 40px",textAlign:"center"}}>
-      Typical salary ranges for senior executive roles in the UK (updated quarterly).
-    </p>
-    <div style={{background:C.bl,border:`1px solid ${C.bd}`,borderRadius:8,padding:20,marginBottom:32,fontSize:13,color:C.tx}}>
-      <strong>Note:</strong> Ranges reflect base salary only and exclude bonuses, equity, and benefits. Total compensation packages typically add 20–50% depending on role and sector.
-    </div>
-    <div style={{display:"grid",gap:16}}>
-      {SALARY.map((s,i)=><div key={i} style={{background:C.card,border:`1px solid ${C.bd}`,borderRadius:8,padding:20,display:"grid",gridTemplateColumns:"1fr auto auto auto",gap:16,alignItems:"center"}}>
-        <div style={{fontSize:16,fontWeight:700,color:C.tx}}>{s.role}</div>
-        <div style={{textAlign:"center"}}>
-          <div style={{fontSize:11,color:C.tl,marginBottom:2}}>Lower Quartile</div>
-          <div style={{fontSize:15,fontWeight:600,color:C.tx}}>£{s.low}k</div>
-        </div>
-        <div style={{textAlign:"center"}}>
-          <div style={{fontSize:11,color:C.tl,marginBottom:2}}>Median</div>
-          <div style={{fontSize:15,fontWeight:600,color:C.accent}}>£{s.mid}k</div>
-        </div>
-        <div style={{textAlign:"center"}}>
-          <div style={{fontSize:11,color:C.tl,marginBottom:2}}>Upper Quartile</div>
-          <div style={{fontSize:15,fontWeight:600,color:C.tx}}>£{s.high}k</div>
-        </div>
-      </div>)}
-    </div>
-    <div style={{marginTop:40,textAlign:"center"}}>
-      <p style={{fontSize:14,color:C.tl,marginBottom:20}}>Need a precise fee estimate for your role?</p>
-      <GoldBtn onClick={()=>go("estimator")}>Use Fee Estimator →</GoldBtn>
-    </div>
-  </div>;
-}
-
-function LlmsTxtPage(){return <div style={{padding:"60px 20px"}}><pre>{LLMS_TXT}</pre></div>;}
-
-// ─── APP SHELL ────────────────────────────────────────────────────────
-
-export default function App(){
-  const [page,setPage]=useState("home");
-  const [menuOpen,setMenuOpen]=useState(false);
-
-  useEffect(()=>{
-    const script=document.createElement("script");
-    script.type="application/ld+json";
-    script.text=JSON.stringify(SCHEMA_ORG);
-    document.head.appendChild(script);
-    return ()=>{try{document.head.removeChild(script);}catch(e){}};
-  },[]);
-
-  const go=useCallback(pg=>{setPage(pg);setMenuOpen(false);window.scrollTo({top:0,behavior:"smooth"});},[]);
-
-  const navItems=[["home","Home"],["guides","Guides"],["industries","Industries"],["sectors","Sectors"],["comparisons","Comparisons"],["blog","Insights"],["locations","Locations"],["glossary","Glossary"],["statistics","Stats"],["resources","Resources"],["quiz","Do I Need a Headhunter?"],["estimator","Fee Calculator"],["contact","Brief a Headhunter"]];
-
-  const getPage=()=>{
-    if(page.startsWith("guide:")){const g=GUIDES.find(x=>x.id===page.slice(6));return g?<GuidePage guide={g} go={go}/>:<GuidesPage go={go}/>;}
-    if(page.startsWith("loc:")){const l=LOCS.find(x=>x.c.toLowerCase()===page.slice(4));return l?<LocationPage loc={l} go={go}/>:<LocationsPage go={go}/>;}
-    if(page.startsWith("sector:")){const s=SECTORS.find(x=>x.id===page.slice(7));return s?<SectorDetailPage sector={s} go={go}/>:<SectorsPage go={go}/>;}
-    if(page.startsWith("comparison:")){const c=COMPARISONS.find(x=>x.id===page.slice(11));return c?<ComparisonPage comp={c} go={go}/>:<ComparisonsPage go={go}/>;}
-    if(page.startsWith("blog:")){const a=BLOG_ARTICLES.find(x=>x.id===page.slice(5));return a?<BlogArticlePage article={a} go={go}/>:<BlogPage go={go}/>;}
-    if(page.startsWith("intent:")){const p=INTENT_PAGES.find(x=>x.id===page.slice(7));return p?<IntentPage page={p} go={go}/>:<HomePage go={go}/>;}
-    if(page.startsWith("industry:")){const i=INDUSTRY_PAGES.find(x=>x.id===page.slice(9));return i?<IndustryPage page={i} go={go}/>:<IndustriesPage go={go}/>;}
-    const map={home:<HomePage go={go}/>,guides:<GuidesPage go={go}/>,quiz:<QuizPage go={go}/>,estimator:<EstimatorPage go={go}/>,statistics:<StatsPage go={go}/>,glossary:<GlossaryPage go={go}/>,sectors:<SectorsPage go={go}/>,comparisons:<ComparisonsPage go={go}/>,locations:<LocationsPage go={go}/>,blog:<BlogPage go={go}/>,resources:<ResourcesPage go={go}/>,contact:<ContactPage go={go}/>,salaries:<SalaryPage go={go}/>,industries:<IndustriesPage go={go}/>,llmstxt:<LlmsTxtPage/>};
-    return map[page]||<HomePage go={go}/>;
-  };
-
-  const navPg=page.split(":")[0];
-
-  return <div style={{fontFamily:"Inter,-apple-system,BlinkMacSystemFont,sans-serif",color:C.tx,background:C.bg,minHeight:"100vh"}}>
-    <nav style={{position:"fixed",top:0,left:0,right:0,zIndex:1000,background:"rgba(26,26,46,0.97)",backdropFilter:"blur(12px)",borderBottom:`1px solid ${C.accent}33`}}>
-      <div style={{maxWidth:1200,margin:"0 auto",padding:"0 18px",display:"flex",alignItems:"center",justifyContent:"space-between",height:52}}>
-        <div onClick={()=>go("home")} style={{cursor:"pointer"}}>
-          <span style={{fontSize:16,fontWeight:800,color:"#fff"}}>headhunters</span>
-          <span style={{fontSize:16,fontWeight:800,color:C.gold}}>.co.uk</span>
-        </div>
-        <button onClick={()=>setMenuOpen(!menuOpen)} style={{background:"none",border:"none",color:"#fff",fontSize:20,cursor:"pointer",padding:"4px 8px"}}>☰</button>
-      </div>
-      {menuOpen&&<div style={{background:C.dark,borderTop:`1px solid ${C.accent}33`,padding:"8px 18px 14px",maxHeight:"75vh",overflowY:"auto"}}>
-        {navItems.map(([id,label])=><button key={id} onClick={()=>go(id)} style={{display:"block",width:"100%",textAlign:"left",background:navPg===id?C.accent+"22":"transparent",border:"none",color:["contact","quiz"].includes(id)?C.gold:navPg===id?"#fff":"#ffffffcc",padding:"9px 10px",borderRadius:5,fontSize:14,fontWeight:["contact","quiz"].includes(id)?700:400,cursor:"pointer"}}>{label}</button>)}
-        <div style={{borderTop:`1px solid ${C.accent}33`,marginTop:8,paddingTop:8}}>
-          <p style={{fontSize:11,color:"#ffffff44",margin:"0 0 6px"}}>Intent guides</p>
-          {INTENT_PAGES.map(p=><button key={p.id} onClick={()=>go("intent:"+p.id)} style={{display:"block",width:"100%",textAlign:"left",background:"transparent",border:"none",color:"#ffffffaa",padding:"7px 10px",borderRadius:5,fontSize:13,cursor:"pointer"}}>{p.title}</button>)}
-        </div>
-        <div style={{borderTop:`1px solid ${C.accent}33`,marginTop:8,paddingTop:8}}>
-          <p style={{fontSize:11,color:"#ffffff44",margin:"0 0 6px"}}>Comparisons</p>
-          {COMPARISONS.map(c=><button key={c.id} onClick={()=>go("compare:"+c.id)} style={{display:"block",width:"100%",textAlign:"left",background:"transparent",border:"none",color:"#ffffffaa",padding:"7px 10px",borderRadius:5,fontSize:13,cursor:"pointer"}}>{c.title}</button>)}
-        </div>
-      </div>}
-    </nav>
-
-    <div style={{paddingTop:52}}>{getPage()}</div>
-
-    <footer style={{background:C.dark,color:"#ffffff66",padding:"32px 20px",textAlign:"center"}}>
-      <div style={{maxWidth:900,margin:"0 auto"}}>
-        <div style={{fontSize:15,fontWeight:700,color:"#fff",marginBottom:6}}>headhunters<span style={{color:C.gold}}>.co.uk</span></div>
-        <p style={{fontSize:12,lineHeight:1.6,margin:"0 0 14px"}}>The UK's leading authority on executive search.</p>
-        <div style={{display:"flex",gap:12,justifyContent:"center",flexWrap:"wrap",marginBottom:12}}>
-          {navItems.filter(([id])=>id!=="home").map(([id,label])=><button key={id} onClick={()=>go(id)} style={{background:"none",border:"none",color:"#ffffff55",fontSize:11,cursor:"pointer",padding:0}}>{label}</button>)}
-          <button onClick={()=>go("llmstxt")} style={{background:"none",border:"none",color:"#ffffff33",fontSize:11,cursor:"pointer",padding:0}}>llms.txt</button>
-        </div>
-        <p style={{fontSize:11,margin:0,color:"#ffffff33"}}>Updated March 2026 · Reviewed quarterly · Schema markup enabled · llms.txt available</p>
-      </div>
-    </footer>
-  </div>;
-}

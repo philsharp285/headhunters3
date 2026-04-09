@@ -1,10 +1,8 @@
-import React from "react";
-import { LLMS_TXT } from "../data";
+[build]
+  publish = "dist"
+  command = "npm run build"
 
-export default function LlmsTxtPage() {
-  return (
-    <div style={{ padding: "60px 20px" }}>
-      <pre>{LLMS_TXT}</pre>
-    </div>
-  );
-}
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
