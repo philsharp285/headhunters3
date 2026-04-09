@@ -1,0 +1,132 @@
+import React, { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { C, INTENT_PAGES } from "../data";
+import { BackBtn, GoldBtn, Btn, CalendlyCTA } from "../components/Buttons";
+import { createBreadcrumbSchema, injectSchema } from "../utils/schema";
+
+export default function IntentPage() {
+  const navigate = useNavigate();
+  const { intentId } = useParams();
+  const page = INTENT_PAGES.find(p => p.id === intentId);
+
+  useEffect(() => {
+    if (page) {
+      document.title = `${page.title} | headhunters.co.uk`;
+      const cleanup = injectSchema(createBreadcrumbSchema([
+        { name: "Home", url: "https://headhunters.co.uk" },
+        { name: page.title, url: `https://headhunters.co.uk/intent/${page.id}` }
+      ]));
+      return cleanup;
+    }
+  }, [page]);
+
+  if (!page) {
+    return (
+      <div style={{padding: "60px 20px 80px", maxWidth: 1000, margin: "0 auto"}}>
+        <BackBtn label="Home" onClick={() => navigate("/")} />
+        <h1 style={{fontSize: 32, fontWeight: 750, color: C.dark, margin: "0 0 20px"}}>Page not found</h1>
+        <button onClick={() => navigate("/")} style={{background:C.accent,color:"#fff",border:"none",padding:"11px 22px",borderRadius:6,fontSize:14,fontWeight:700,cursor:"pointer"}}>
+          Return Home
+        </button>
+      </div>
+    );
+  }
+
+  return <div style={{padding:"60px 20px 80px",maxWidth:800,margin:"0 auto"}}>
+    <BackBtn label="Home" onClick={()=>navigate("/")}/>
+    <div style={{textAlign:"center",marginBottom:40}}>
+      <div style={{fontSize:56,marginBottom:12}}>{page.icon}</div>
+      <h1 style={{fontSize:"clamp(28px,4vw,38px)",fontWeight:750,color:C.tx,margin:"0 0 20px"}}>{page.title}</h1>
+    </div>
+
+    <div style={{background:C.bl,border:`1px solid ${C.bd}`,borderRadius:8,padding:28,marginBottom:32}}>
+      {page.intro.split('\n\n').map((p,i)=><p key={i} style={{fontSize:15,lineHeight:1.7,color:C.tx,margin:i===0?"0 0 16px":"16px 0"}}>{p}</p>)}
+    </div>
+
+    <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(200px,1fr))",gap:16,marginBottom:32}}>
+      <div style={{background:C.card,border:`1px solid ${C.bd}`,borderRadius:8,padding:20}}>
+        <div style={{fontSize:12,color:C.tl,fontWeight:600,marginBottom:4}}>Salary Range</div>
+        <div style={{fontSize:16,fontWeight:700,color:C.tx}}>{page.salaryRange}</div>
+      </div>
+      <div style={{background:C.card,border:`1px solid ${C.bd}`,borderRadius:8,padding:20}}>
+        <div style={{fontSize:12,color:C.tl,fontWeight:600,marginBottom:4}}>Search Fee</div>
+        <div style={{fontSize:16,fontWeight:700,color:C.tx}}>{page.searchFee}</div>
+      </div>
+      <div style={{background:C.card,border:`1px solid ${C.bd}`,borderRadius:8,padding:20}}>
+        <div style={{fontSize:12,color:C.tl,fontWeight:600,marginBottom:4}}>Timeline</div>
+        <div style={{fontSize:16,fontWeight:700,color:C.tx}}>{page.timeline}</div>
+      </div>
+    </div>
+
+    {page.responsibilities && <>
+      <div style={{marginBottom:32}}>
+        <h2 style={{fontSize:20,fontWeight:700,color:C.tx,margin:"0 0 16px",borderBottom:`2px solid ${C.accent}`,paddingBottom:8}}>Typical Responsibilities</h2>
+        <ul style={{fontSize:15,lineHeight:1.8,color:C.tx,margin:0,paddingLeft:20}}>
+          {page.responsibilities.map((r,i)=><li key={i} style={{marginBottom:10}}>{r}</li>)}
+        </ul>
+      </div>
+    </>}
+
+    {page.keyQualities && <>
+      <div style={{marginBottom:32}}>
+        <h2 style={{fontSize:20,fontWeight:700,color:C.tx,margin:"0 0 16px",borderBottom:`2px solid ${C.accent}`,paddingBottom:8}}>Key Qualities to Look For</h2>
+        <div style={{display:"grid",gap:12}}>
+          {page.keyQualities.map((q,i)=>{
+            const [label,...rest]=q.split(':');
+            return <div key={i} style={{background:C.card,border:`1px solid ${C.bd}`,borderRadius:8,padding:16}}>
+              <div style={{fontWeight:700,color:C.accent,marginBottom:4}}>{label}</div>
+              <div style={{fontSize:14,lineHeight:1.6,color:C.tx}}>{rest.join(':').trim()}</div>
+            </div>;
+          })}
+        </div>
+      </div>
+    </>}
+
+    <div style={{marginBottom:32}}>
+      <h2 style={{fontSize:20,fontWeight:700,color:C.tx,margin:"0 0 16px",borderBottom:`2px solid ${C.accent}`,paddingBottom:8}}>Key Considerations</h2>
+      <ul style={{fontSize:15,lineHeight:1.8,color:C.tx,margin:0,paddingLeft:20}}>
+        {page.considerations.map((c,i)=><li key={i} style={{marginBottom:10}}>{c}</li>)}
+      </ul>
+    </div>
+
+    {page.interviewQuestions && <>
+      <div style={{marginBottom:32}}>
+        <h2 style={{fontSize:20,fontWeight:700,color:C.tx,margin:"0 0 16px",borderBottom:`2px solid ${C.accent}`,paddingBottom:8}}>Interview Questions to Ask</h2>
+        <div style={{display:"grid",gap:12}}>
+          {page.interviewQuestions.map((q,i)=><div key={i} style={{background:C.bl,border:`1px solid ${C.bd}`,borderRadius:8,padding:16}}>
+            <div style={{fontSize:14,lineHeight:1.7,color:C.tx,fontWeight:500}}>{q}</div>
+          </div>)}
+        </div>
+      </div>
+    </>}
+
+    {page.hiringGuide && <>
+      <div style={{marginBottom:32}}>
+        <h2 style={{fontSize:20,fontWeight:700,color:C.tx,margin:"0 0 16px",borderBottom:`2px solid ${C.accent}`,paddingBottom:8}}>Step-by-Step Hiring Guide</h2>
+        <div style={{display:"grid",gap:16}}>
+          {page.hiringGuide.map((step,i)=><div key={i} style={{background:C.card,border:`1px solid ${C.bd}`,borderLeft:`4px solid ${C.accent}`,borderRadius:8,padding:20}}>
+            <div style={{display:"flex",alignItems:"start",gap:12}}>
+              <div style={{background:C.accent,color:"#fff",borderRadius:"50%",width:28,height:28,display:"flex",alignItems:"center",justifyContent:"center",fontSize:13,fontWeight:700,flexShrink:0}}>{i+1}</div>
+              <div style={{flex:1}}>
+                <div style={{fontWeight:700,color:C.tx,marginBottom:6,fontSize:15}}>{step.step}</div>
+                <div style={{fontSize:14,lineHeight:1.7,color:C.tl}}>{step.detail}</div>
+              </div>
+            </div>
+          </div>)}
+        </div>
+      </div>
+    </>}
+
+    <div style={{background:C.bl,border:`1px solid ${C.bd}`,borderRadius:8,padding:24,marginBottom:32}}>
+      <h3 style={{fontSize:18,fontWeight:700,color:C.tx,margin:"0 0 12px"}}>Why Use Executive Search</h3>
+      {page.whySearch.split('\n\n').map((p,i)=><p key={i} style={{fontSize:15,lineHeight:1.7,color:C.tx,margin:i===0?"0":"16px 0 0"}}>{p}</p>)}
+    </div>
+
+    <CalendlyCTA/>
+
+    <div style={{marginTop:40,display:"flex",gap:12,justifyContent:"center",flexWrap:"wrap"}}>
+      <GoldBtn onClick={()=>navigate("/contact")}>Brief a {page.role} Search →</GoldBtn>
+      <Btn onClick={()=>navigate("/estimator")}>Calculate Fee</Btn>
+    </div>
+  </div>;
+}

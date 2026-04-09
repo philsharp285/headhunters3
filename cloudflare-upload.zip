@@ -1,0 +1,46 @@
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { C, FUNCTIONS } from "../data";
+import { BackBtn, SectionTitle, CalendlyBtn, GoldBtn } from "../components/Buttons";
+import { EnquiryBox } from "../components/EnquiryForm";
+import { createBreadcrumbSchema, injectSchema } from "../utils/schema";
+
+export default function FunctionsPage() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = "C-Suite & Executive Function Headhunters | CEO, CFO, CTO Recruitment";
+    const cleanup = injectSchema(createBreadcrumbSchema([
+      { name: "Home", url: "https://headhunters.co.uk" },
+      { name: "Functions", url: "https://headhunters.co.uk/functions" }
+    ]));
+    return cleanup;
+  }, []);
+
+  return (
+    <div style={{ padding: "60px 20px 80px", maxWidth: 1100, margin: "0 auto" }}>
+      <BackBtn label="Home" onClick={() => navigate("/")} />
+      <h1 style={{fontSize:"clamp(28px,4vw,42px)",fontWeight:800,color:C.dark,textAlign:"center",margin:"0 0 16px"}}>C-Suite & Executive Function Headhunters</h1>
+      <p style={{ fontSize: 15, color: C.tl, maxWidth: 700, margin: "0 auto 40px", textAlign: "center" }}>
+        Specialist headhunters for hiring C-suite and senior leadership roles across all functions.
+      </p>
+      <EnquiryBox
+        title="Looking to hire a specific function?"
+        subtitle="Connect with consultants who specialize in executive placements"
+        buttonText="Request a Consultation"
+        context="Enquiry from Functions page"
+      />
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(320px,1fr))", gap: 20 }}>
+        {FUNCTIONS.map(f => <div key={f.id} onClick={() => navigate(`/functions/${f.id}`)} style={{ background: C.card, border: `1px solid ${C.bd}`, borderRadius: 8, padding: 24, cursor: "pointer", transition: "all 0.2s", boxShadow: "0 1px 3px rgba(0,0,0,0.05)" }} onMouseEnter={e => { e.currentTarget.style.boxShadow = "0 4px 12px rgba(0,0,0,0.1)"; e.currentTarget.style.borderColor = C.accent; }} onMouseLeave={e => { e.currentTarget.style.boxShadow = "0 1px 3px rgba(0,0,0,0.05)"; e.currentTarget.style.borderColor = C.bd; }}>
+          <div style={{ fontSize: 36, marginBottom: 12 }}>{f.icon}</div>
+          <h3 style={{ fontSize: 18, fontWeight: 700, color: C.tx, margin: "0 0 8px" }}>{f.fullName} ({f.name})</h3>
+          <p style={{ fontSize: 13, color: C.tl, lineHeight: 1.5, margin: 0 }}>{f.desc}</p>
+        </div>)}
+      </div>
+      <div style={{ marginTop: 48, display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
+        <CalendlyBtn>Book Free Consultation</CalendlyBtn>
+        <GoldBtn onClick={() => navigate("/contact")}>Brief a Headhunter</GoldBtn>
+      </div>
+    </div>
+  );
+}

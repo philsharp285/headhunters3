@@ -1,0 +1,44 @@
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { C, LOCS } from "../data";
+import { BackBtn, SectionTitle, CalendlyBtn, GoldBtn } from "../components/Buttons";
+import { EnquiryBox } from "../components/EnquiryForm";
+import { createBreadcrumbSchema, injectSchema } from "../utils/schema";
+
+export default function LocationsPage() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = "Executive Search Headhunters by UK Location | London, Manchester & More";
+    const cleanup = injectSchema(createBreadcrumbSchema([
+      { name: "Home", url: "https://headhunters.co.uk" },
+      { name: "Locations", url: "https://headhunters.co.uk/locations" }
+    ]));
+    return cleanup;
+  }, []);
+
+  return <div style={{padding:"60px 20px 80px",maxWidth:1200,margin:"0 auto"}}>
+    <BackBtn label="Home" onClick={()=>navigate("/")}/>
+    <h1 style={{fontSize:"clamp(28px,4vw,42px)",fontWeight:800,color:C.dark,textAlign:"center",margin:"0 0 16px"}}>Headhunters Across the UK</h1>
+    <p style={{fontSize:15,color:C.tl,maxWidth:700,margin:"0 auto 40px",textAlign:"center"}}>
+      Find executive search headhunters with expertise across major UK cities and regions.
+    </p>
+    <EnquiryBox
+      title="Need a headhunter in a specific location?"
+      subtitle="Get connected with specialists operating in your region"
+      buttonText="Request a Consultation"
+      context="Enquiry from Locations page"
+    />
+    <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(280px,1fr))",gap:16}}>
+      {LOCS.map(l=><div key={l.c} onClick={()=>navigate(`/locations/${l.c.toLowerCase()}`)} style={{background:C.card,border:`1px solid ${C.bd}`,borderRadius:8,padding:20,cursor:"pointer",transition:"all 0.2s",boxShadow:"0 1px 3px rgba(0,0,0,0.05)"}} onMouseEnter={e=>{e.currentTarget.style.boxShadow="0 4px 12px rgba(0,0,0,0.1)";e.currentTarget.style.borderColor=C.accent;}} onMouseLeave={e=>{e.currentTarget.style.boxShadow="0 1px 3px rgba(0,0,0,0.05)";e.currentTarget.style.borderColor=C.bd;}}>
+        <h3 style={{fontSize:18,fontWeight:700,color:C.tx,margin:"0 0 8px"}}>{l.c}</h3>
+        <p style={{fontSize:13,color:C.tl,lineHeight:1.5,margin:"0 0 10px"}}>{l.p}</p>
+        <div style={{fontSize:11,color:C.accent,fontWeight:600}}>View Details →</div>
+      </div>)}
+    </div>
+    <div style={{marginTop:48,display:"flex",gap:12,justifyContent:"center",flexWrap:"wrap"}}>
+      <CalendlyBtn>Book Free Consultation</CalendlyBtn>
+      <GoldBtn onClick={()=>navigate("/contact")}>Brief a Headhunter</GoldBtn>
+    </div>
+  </div>;
+}
